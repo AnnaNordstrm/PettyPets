@@ -1,4 +1,5 @@
 # Takes the last feeding time, time now and returns the difference in minutes
+   def delta_time(last_update)
     last_feeding_time = current_time()
     now = str(current_time())
     last = str(last_update)
