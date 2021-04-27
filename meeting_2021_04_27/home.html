@@ -7,22 +7,22 @@
 </head>
 <script>
     combiner = () => {
-        var text1 = $('#text1').val();
-        var text2 = $('#text2').val();
+        //var text1 = $('#text1').val();
+        //var text2 = $('#text2').val();
 
         $.ajax(
             {
                 url: "/join",
                 type: "POST",
                 data: {
-                    text1: text1,
-                    text2: text2
+                    //text1: text1,
+                    //text2: text2
                 }
             }).done((response) => {
             var html = "<p> RESULT : </p>";
             response = response.result;
-            $.each(response, (key, val) => {
-                html += "<p>" + key + ": " + val + "</p>";
+           /* $.each(response, (key, val) => {
+                html += "<p>" + key + ": " + val + "</p>"; */
             });
             $(".results").append(html);
         });
@@ -33,7 +33,7 @@
         Taking input from the web and calling Junior on the back-end!<br><br>
             <!-- One: <input type="text" id="text1"><br/> -->
             <!-- Two: <input type="text" id="text2"><br/> -->
-            <button id="clicked" onclick="food_level(True, delta_time(2104251018)), 100">
+            <button id="clicked" onclick="combiner()">
                 Eat
             </button>
     </p>
