@@ -1,4 +1,3 @@
-
 def food_level(tryFeed, deltatime, foodLevel):
 #Takes in if user tries to feed the pet, time in mins since last feeding and its foodlevel.
 #It returns
