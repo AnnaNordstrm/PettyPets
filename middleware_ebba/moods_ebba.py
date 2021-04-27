@@ -1,4 +1,4 @@
-import animation
+from animation import regular
 
 def mood(emotion, isHungry=False, isSleepy=False, isLonely=False):
     """
@@ -16,7 +16,7 @@ def mood(emotion, isHungry=False, isSleepy=False, isLonely=False):
         #if it was happy to begin with but now is hungry, change the mood.
         if emotion == "happy":
             emotion = "angry"
-            animation.regular(emotion, new_mood = True)
+            regular(emotion, new_mood = True)
         #in case the pet is already angry, we don't need to start the
         #angry animation over again.
         elif emotion == "angry":
@@ -25,19 +25,22 @@ def mood(emotion, isHungry=False, isSleepy=False, isLonely=False):
     elif isSleepy == True:
             if emotion == "happy":
                 emotion = "angry"
-                animation.regular(emotion, new_mood = True)
+                regular(emotion, new_mood = True)
             elif emotion == "angry":
                 pass
     
     elif isLonely == True:
         if emotion == "happy":
             emotion = "angry"
-            animation.regular(emotion, new_mood = True)
+            regular(emotion, new_mood = True)
         emotion = "angry"
     
     else: #if its needs are fulfilled
         if emotion == "angry":
             emotion = "happy"
-            animation.regular(emotion, new_mood = True)
+            regular(emotion, new_mood = True)
         elif emotion == "happy": #if it was already happy to begin with
             pass
+
+    return emotion
+
