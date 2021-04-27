@@ -2,22 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PettyPets</title>
+    <title>Junior</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <style>
-    body{
-        background-color: #e6ccff;
-    }
-    .results{
-        font-family: "Comic Sans MS", "Comic Sans", cursive;
-    }
-    </style>
 </head>
 <script>
-    // funktion
-    feeder = () => {
+    combiner = () => {
         var text1 = $('#text1').val();
-        //var text2 = $('#text2').val();
+        var text2 = $('#text2').val();
 
         $.ajax(
             {
@@ -25,10 +16,10 @@
                 type: "POST",
                 data: {
                     text1: text1,
-                    //text2: text2
+                    text2: text2
                 }
             }).done((response) => {
-            var html = "<p> Thank You! </p>";
+            var html = "<p> RESULT : </p>";
             response = response.result;
             $.each(response, (key, val) => {
                 html += "<p>" + key + ": " + val + "</p>";
@@ -39,14 +30,13 @@
 </script>
 <body>
     <p>
-        <h2 style = font-family:"Comic Sans MS", "Comic Sans", cursive;> Let's feed your pet! </h2> <br>
-        <p style = font-family:"Comic Sans MS", "Comic Sans", cursive;> Feeding points: <input type="text" id="text1"><br/>
-            <button id="clicked" onclick="feeder()">
-                Feed
+        Taking input from the web and calling Junior on the back-end!<br><br>
+            <!-- One: <input type="text" id="text1"><br/> -->
+            <!-- Two: <input type="text" id="text2"><br/> -->
+            <button id="clicked" onclick="food_level(True, delta_time(2104251018)), 100">
+                Eat
             </button>
     </p>
-    <br>
-    <img src="static/design_1.jpg" width = 300 height = 300>
     <div class="results">
     </div>
 </body>
