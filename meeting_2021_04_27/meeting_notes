@@ -4,11 +4,17 @@
 En sak att tänka på är att funktionen delta_time returnerar en tuple, dvs två olika värden. 
 Detta blir ett problem då man ska köra food_level, som om jag förstått det rätt endast ska
 ta in ett enda värde (rätta mig om jag har fel) Jag gjorde en ändring så att endast det första
-elementet i tupeln användes, dvs jag skrev delta_time[0] på rad 8 i middleware.
+elementet i tupeln användes, dvs jag skrev delta_time[0] på rad 8 i middleware.py
 
 
 Dessutom har jag läst att när man använder "onclick" (finns i home.html rad 36) så kan man inte 
-ha en pytonfunktion efter, utan det måste vara en funktion i JavaScript. Combiner (som ligger uvanför i home)
+ha en pytonfunktion efter, utan det måste vara en funktion i JavaScript. Combiner (som ligger ovanför i home)
 var det som tidigare stod där. Det combiner gör är att knyta samman vår pythonkod, specifikt det som finns
 i junior.py på rad 15 som står under /join. Därför ändrade jag onclick till att kopplas till combiner, 
 som koppals till junior, som kopplas till food_level. 
+
+
+Resten av förändringarna går att se i filhistoriken. 
+
+
+Koden borde gå att exekveras som den är, den funkade iallafall tisdag natt :):
