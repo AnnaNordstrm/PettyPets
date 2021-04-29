@@ -42,16 +42,16 @@ class Pet :
     def age():
         pass
 
-#_______________________________________________________________________________
+#______________________________Testkod_________________________________________________
 Lemmy = Pet("Lemmy", current_time())
 
-print(Lemmy.foodLevel)
+print("Lemmys hungernivå när han föds: ",Lemmy.foodLevel)
 
 Lemmy.food_level(True)
 
-print(Lemmy.foodLevel)
+print("Lemmys hungernivå när man kör food_level för första gången: ",Lemmy.foodLevel)
 
 time.sleep(65)
-print ("what about now?")
+
 Lemmy.food_level(True)
-print(Lemmy.foodLevel)
+print("Lemmys hungernivå efter en minut: "Lemmy.foodLevel)
