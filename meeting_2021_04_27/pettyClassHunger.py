@@ -30,7 +30,7 @@ class Pet :
             self.foodLevel = self.foodLevel + 30
             self.feed = True
             self.mood = 'happy'
-        elif self.foodLevel < 30:
+        elif self.foodLevel 1 < 30:
             self.mood = 'angry'
         elif self.foodLevel < 0:           # When foodLevel is going below zero, mood becomes angry instead of dead
             self.mood = 'dead'             # Solution: intervals?
