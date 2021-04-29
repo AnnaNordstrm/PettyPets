@@ -1,27 +1,28 @@
 import time
 from deltatime import delta_time
 from get_time import *
+
 """
 Parameters:
-name - The name of the animal
-birth - A function that saves the time of birth
+name - The name of the pet
 """
 class Pet :
-    def __init__ (self, name, birth):
+    def __init__ (self, name):
         self.name = name
-        self.birth = birth
+        self.timeOfBirth = current_time()
         self.foodLevel = 40
-        self.lastFed = birth
+        self.lastFed = current_time()
 
 
     """
-    Purpose: Takes in if user tries to feed the pet.
+    Purpose: To make the object hungrier with time
     Parameters:
-    tryFeed: Boolean
+    tryFeed: Boolean, takes in whether user tries to feed the pet.
     Returns: an updated self.foodLevel
     """
-    def food_level(self, tryFeed):
-        deltatime = delta_time(Lemmy.lastFed)[0]
+    def food_level(self, tryFeed):                          #  Changes from refactoring: 
+                                                            #         * deltatime is now defined within the method via class attribute self.lastfed
+        deltatime = delta_time(Lemmy.lastFed)[0]            #         * foodLevel is now a class attribute
         self.foodLevel = self.foodLevel-(0.05*deltatime)
         if self.foodLevel >= 70 & tryFeed:
             feed = False
@@ -39,9 +40,6 @@ class Pet :
         return self.foodLevel
 
 
-    def age():
-        pass
-
 #______________________________Testkod_________________________________________________
 Lemmy = Pet("Lemmy", current_time())
 
@@ -49,7 +47,7 @@ print("Lemmys hungernivå när han föds: ",Lemmy.foodLevel)
 
 Lemmy.food_level(True)
 
-print("Lemmys hungernivå när man kör food_level för första gången: ",Lemmy.foodLevel)
+print("Lemmys hungernivå när man kör food_level() för första gången: ",Lemmy.foodLevel)
 
 time.sleep(65)
 
