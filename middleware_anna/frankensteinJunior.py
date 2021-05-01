@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('home_anna.html')
+    return render_template('home.html')
 
 @app.route('/join', methods=['GET','POST'])
 def join():
