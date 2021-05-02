@@ -32,7 +32,7 @@ def join():
                                                                 #         * deltatime -> defined within the method via class attribute self.lastfed
             deltatime = delta_time(self.lastFed)[0]             #         * foodLevel -> class attribute
             self.foodLevel = self.foodLevel-(0.05*deltatime)    #         * mood -> class attribute
-            if self.foodLevel >= 70 & tryFeed:
+            if self.foodLevel >= 70 & tryFeed:                  #         * feed -> class attribute
                 self.feed = False
                 self.mood = 'happy'
             elif self.foodLevel > 0 & tryFeed:
@@ -48,8 +48,6 @@ def join():
             #return [self.foodLevel, mood, feed]
             return self.foodLevel, self.mood
 
-        #global belly
-        #global lastfeedingtime
     text1 = request.form['text1']
         #text2 = request.form['text2']
     anna = Pet(text1)

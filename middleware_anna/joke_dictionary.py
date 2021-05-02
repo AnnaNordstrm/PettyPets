@@ -35,12 +35,14 @@ def jokeProvider ():
     punchLine = punchLinesD["Punchline" + str(randNr)]
     karma = karmaPointsD["Karma points" + str(randNr)]
 
-    return buildUp
-    return punchLine
+    return buildUp, punchLine
 
     
  #________________TESTCODE____________________________#
 
-jokeMaker("Orange you glad", "to see me")
+jokeMaker("Orange you glad", "to see me!")
+jokeMaker("AA", "BB")
 
-jokeProvider()
+
+print(jokeProvider())
+print(jokeProvider())
