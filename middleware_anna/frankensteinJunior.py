@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('home_anna.html')
 
 @app.route('/join', methods=['GET','POST'])
 def join():
@@ -50,8 +50,8 @@ def join():
 
     text1 = request.form['text1']
         #text2 = request.form['text2']
-    anna = Pet(text1)
-    ee = anna.food_level(True)
+    user = Pet(text1)
+    currentFood = user.food_level(True)
     """
         deltatime = datetime.now() - lastfeedingtime
         if deltatime!= 0:
@@ -64,7 +64,7 @@ def join():
             "Result": join_args(text1, belly)
     """
     result = {
-        "Result": text1+" is now this full : "+ str(ee[0])
+        "Result": text1+" is now this full : "+ str(currentFood[0])
             }
     return jsonify(result=result)
 
