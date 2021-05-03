@@ -1,4 +1,3 @@
-
 from flask import Flask, request, render_template, jsonify
 from middleware import join_args, food_level, delta_time, current_time
 #from deltatime import delta_time
