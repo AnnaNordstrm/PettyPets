@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PettyPet</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<script>
+    combiner = () => {
+        //var text1 = $('#text1').val();
+        //var text2 = $('#text2').val();
+
+        $.ajax(
+            {
+                url: "/join",
+                type: "POST",
+                data: {
+                    //text1: text1,
+                    //text2: text2
+                }
+            }).done((response) => {
+            var html = "<p> RESULT : </p>";
+            response = response.result;
+            $.each(response, (key, val) => {
+                html += "<p>" + key + ": " + val + "</p>";
+                // Denna del ovan kommentaren var förr bortkommenterad, det visar sig att den inte kan tas bort än
+            });
+            $(".results").append(html);
+        });
+    };
+</script>
+<body>
+    <p>
+        Let's feed your pet!<br><br>
+            <!-- One: <input type="text" id="text1"><br/> -->
+            <!-- Two: <input type="text" id="text2"><br/> -->
+            <button id="clicked" onclick="combiner()">
+                Eat
+            </button>
+    </p>
+    <br>
+    <img src="static/design_1.jpg" width = 300 height = 300>
+    <div class="results">
+    </div>
+</body>
+</html>
