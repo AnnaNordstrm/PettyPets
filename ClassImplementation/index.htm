@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PettyPets</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<script>
+    // funktion
+    combiner = () => {
+        var text1 = $('#text1').val();
+        //var text2 = $('#text2').val();
+
+        $.ajax(
+            {
+                url: "/join",
+                type: "POST",
+                data: {
+                    text1: text1,
+                    //text2: text2
+                }
+            }).done((response) => {
+            var html = "<p> Thank You! </p>";
+            response = response.result;
+            $.each(response, (key, val) => {
+                html += "<p>" + key + ": " + val + "</p>";
+            });
+            $(".results").append(html);
+        });
+    };
+</script>
+<body>
+    <p>
+        Let's name your pet! <br><br>
+            Name: <input type="text" id="text1"><br/>
+            <button id="clicked" onclick="combiner()">
+                Create pet
+            </button>
+    </p>
+    <img src="static/design_1.jpg" width = 200 height = 200>
+    <div class="results">
+    </div>
+</body>
+</html>
