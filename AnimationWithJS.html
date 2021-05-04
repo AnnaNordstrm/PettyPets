@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+
+    <button onclick="eating()">EAT</button>
+    <button onclick="sleeping()">SLEEP</button>
+
+    <div><iframe id="x" src="https://giphy.com/embed/KZMWLuOepc88Q6a4jU"></iframe><p><a href="https://giphy.com/gifs/sandiegozoo-funny-happy-3o7aD6vQ4qVEYsuwQo">via GIPHY</a></p>
+    </div>
+    
+
+<script>
+// HOW TO INSERT IMAGES IN HTML TAGS THROUGH JS: https://www.quora.com/How-do-you-insert-an-image-in-Javascript?share=1
+// HOW TO MEASSURE TIME IN JS: https://stackoverflow.com/questions/41632942/how-to-measure-time-elapsed-on-javascript    
+    
+    function show_interaction() {
+        // will be called upon when feeding the lemur, or any other interaction.
+        // will count to 4, then it returns "stop" to whatever called it, in order to make an animation stop.
+        startTime = new Date();
+        var counting = true;
+        while (counting == true){
+            endTime = new Date();
+            var timeDiff = endTime - startTime; //in ms 
+            // strip the ms 
+            timeDiff /= 1000; 
+
+            // get seconds 
+            var seconds = Math.round(timeDiff);
+            if (seconds > 4) {
+                counting = false
+            }
+        }
+        return "stop"
+    }
+
+    function eating() {
+        // change level of fullnes by calling for tryFeed in food_level.py
+
+        document.getElementById("x").src="https://giphy.com/embed/bWFSMCn6BzM3fyRCCg"; // can you have ; here?
+        var animate_eating = show_interaction();
+        if (animate_eating == "stop") {
+            // go back to normal gif
+            document.getElementById("x").src="https://giphy.com/embed/KZMWLuOepc88Q6a4jU";
+        }  
+    }
+
+    function sleeping() {
+        // change level of sleepiness by calling for relevant python function.
+        document.getElementById("x").src="https://giphy.com/embed/qozauafWRlIxG"; // can you have ; here?
+        var animate_sleeping = show_interaction();
+        if (animate_sleeping == "stop") {
+            // go back to normal gif
+            document.getElementById("x").src="https://giphy.com/embed/KZMWLuOepc88Q6a4jU";
+        }
+    }
+
+</script>
+
+</body>
+</html>
+
+
