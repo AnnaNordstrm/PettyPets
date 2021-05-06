@@ -58,7 +58,7 @@
 
     function timer(time) {
         // will be called upon when feeding the lemur, or any other interaction.
-        // will count to 4, then it returns "stop" to whatever called it, in order to make an animation stop.
+        // will count to to the provided time (an int representings seconds), then it returns "stop" to whatever called it, in order to make an animation stop.
         startTime = new Date();
         var counting = true;
         while (counting == true){
@@ -86,7 +86,7 @@
             // go back to normal gif
             document.getElementById("x").src="https://giphy.com/embed/KZMWLuOepc88Q6a4jU";
             }
-        tell_joke()
+        tell_joke();
         
     }
 
@@ -94,7 +94,7 @@
         // change level of sleepiness by calling for relevant python function. Has yet to be implemented.
 
         document.getElementById("x").src="https://giphy.com/embed/qozauafWRlIxG";
-        var animate_sleeping = timer();
+        var animate_sleeping = timer(4);
         if (animate_sleeping == "stop") {
             // go back to normal gif
             document.getElementById("x").src="https://giphy.com/embed/KZMWLuOepc88Q6a4jU";
