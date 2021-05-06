@@ -10,13 +10,53 @@
 
     <div><iframe id="x" src="https://giphy.com/embed/KZMWLuOepc88Q6a4jU"></iframe><p><a href="https://giphy.com/gifs/sandiegozoo-funny-happy-3o7aD6vQ4qVEYsuwQo">via GIPHY</a></p>
     </div>
+
+    <div style="background-color: blue; color: white;"id="talking_box">
+        <p id="joke"></p>
+        <p id="buildup"></p>
+        <p id="punchline"></p>
+    </div>
     
 
 <script>
 // HOW TO INSERT IMAGES IN HTML TAGS THROUGH JS: https://www.quora.com/How-do-you-insert-an-image-in-Javascript?share=1
 // HOW TO MEASSURE TIME IN JS: https://stackoverflow.com/questions/41632942/how-to-measure-time-elapsed-on-javascript    
-    
-    function show_interaction() {
+
+    // this is just a joke used to see if the code works so far. Will be removed when I've figured out how to get a joke from the joke dictionary in python.
+    var a_joke = ["I wondered why the frisbee was getting bigger...", "then it hit me."]; 
+
+    function tell_buildup() {
+        // assumes that the joke consists of a list.
+        document.getElementById("buildup").innerHTML = a_joke[0];
+    }
+
+    function tell_punchline() {
+        // assumes that the joke consists of a list.
+        document.getElementById("punchline").innerHTML = a_joke[1];
+    }
+
+    function clear_joke() {
+        // removes the joke from the screen. 
+        
+        document.getElementById("joke").innerHTML = "";
+        document.getElementById("buildup").innerHTML = "";
+        document.getElementById("punchline").innerHTML = "";
+
+    }
+
+    function tell_joke() {
+        //get a joke from joke dictionary. Yet to be implemented.
+
+        //tell a joke.
+        document.getElementById("joke").innerHTML = "Here's a little joke for you...";
+        window.setTimeout(tell_buildup, 4000); // wait 4 seconds
+        window.setTimeout(tell_punchline, 8000); // wait another 4 seconds
+
+        // clear it.
+        window.setTimeout(clear_joke, 12000); // wait yet another 4 seconds before removing the joke from screen.
+    }
+
+    function timer(time) {
         // will be called upon when feeding the lemur, or any other interaction.
         // will count to 4, then it returns "stop" to whatever called it, in order to make an animation stop.
         startTime = new Date();
@@ -29,32 +69,37 @@
 
             // get seconds 
             var seconds = Math.round(timeDiff);
-            if (seconds > 4) {
-                counting = false
+            if (seconds > time) {
+                counting = false;
             }
         }
         return "stop"
     }
 
     function eating() {
-        // change level of fullnes by calling for tryFeed in food_level.py
+        // change level of fullnes by calling for tryFeed in food_level.py. Has yet to be implemented.
 
+        // EATING
         document.getElementById("x").src="https://giphy.com/embed/bWFSMCn6BzM3fyRCCg"; // can you have ; here?
-        var animate_eating = show_interaction();
+        var animate_eating = timer(4);
         if (animate_eating == "stop") {
             // go back to normal gif
             document.getElementById("x").src="https://giphy.com/embed/KZMWLuOepc88Q6a4jU";
-        }  
+            }
+        tell_joke()
+        
     }
 
     function sleeping() {
-        // change level of sleepiness by calling for relevant python function.
-        document.getElementById("x").src="https://giphy.com/embed/qozauafWRlIxG"; // can you have ; here?
-        var animate_sleeping = show_interaction();
+        // change level of sleepiness by calling for relevant python function. Has yet to be implemented.
+
+        document.getElementById("x").src="https://giphy.com/embed/qozauafWRlIxG";
+        var animate_sleeping = timer();
         if (animate_sleeping == "stop") {
             // go back to normal gif
             document.getElementById("x").src="https://giphy.com/embed/KZMWLuOepc88Q6a4jU";
         }
+    
     }
 
 </script>
