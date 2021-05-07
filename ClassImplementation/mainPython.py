@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template("index.html")
 
 @app.route('/join', methods=['GET','POST'])
 def join():
@@ -26,7 +26,7 @@ def join():
         Purpose: To make the object hungrier with time, and if right conditions: feeds the pet +30
         Parameters:
         tryFeed: Boolean, takes in whether user tries to feed the pet.
-        Returns: an updated self, mood (and feed)
+        Returns: an updated self, mood and feed
         """
         def food_level(self, tryFeed):                          #  Changes from refactoring: 
                                                                 #         * deltatime -> defined within the method via class attribute self.lastfed
@@ -49,28 +49,23 @@ def join():
             #return [self.foodLevel, mood, feed]
             #return self.foodLevel, self.mood
 
+        def sleep_level():
+            pass
+
+
+        def 
+
+
+
+
     text1 = request.form['text1']
-        #text2 = request.form['text2']
     user = Pet(text1)
     user.food_level(True)
-    currentFoodLevel = user.foodLevel
 
-    """
-        deltatime = datetime.now() - lastfeedingtime
-        if deltatime!= 0:
-            if int(text1):
-                lastfeedingtime = datetime.now()
-
-        belly = belly + int(text1)
-        
-        result = {
-            "Result": join_args(text1, belly)
-    """
     result = {
-        "Result": text1+" is now this full : "+ str(currentFoodLevel)
+    "Hunger": text1+" is now this full : "+ str(user.foodLevel)
             }
     return jsonify(result=result)
-
 if __name__ == '__main__':
     app.run(debug=True)
 
