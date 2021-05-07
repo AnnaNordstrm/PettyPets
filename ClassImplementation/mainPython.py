@@ -16,7 +16,7 @@ def join():
         def __init__ (self, name):
             self.name = name
             self.timeOfBirth = current_time()
-            self.foodLevel = 30
+            self.foodLevel = -2
             self.lastFed = current_time()
             self.mood = 'angry'
             self.feed = False
@@ -40,7 +40,7 @@ def join():
                 self.foodLevel += 30
                 self.feed = True
                 self.mood = 'happy'
-            elif self.foodLevel < 30 and self.foodlevel > 0:
+            elif self.foodLevel < 30 and self.foodLevel > 0:
                 self.mood = 'angry'
             elif self.foodLevel <= 0:           # When foodLevel is going below zero, mood will always 
                 self.mood = 'dead'              # become angry and pet will never be dead.
@@ -53,7 +53,8 @@ def join():
             pass
 
 
-        def 
+        def pet_level():
+            pass
 
 
 
@@ -63,7 +64,8 @@ def join():
     user.food_level(True)
 
     result = {
-    "Hunger": text1+" is now this full : "+ str(user.foodLevel)
+    "Hunger": text1+" is now this full : "+ str(user.foodLevel),
+    "Mood" : text1+ " is now "+ user.mood
             }
     return jsonify(result=result)
 if __name__ == '__main__':
