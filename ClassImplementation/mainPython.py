@@ -16,9 +16,9 @@ def join():
         def __init__ (self, name):
             self.name = name
             self.timeOfBirth = current_time()
-            self.foodLevel = -2
+            self.foodLevel = 4
             self.lastFed = current_time()
-            self.mood = 'angry'
+            self.mood = 'ヽ(ಠ_ಠ)ノ'
             self.feed = False
 
 
@@ -35,15 +35,15 @@ def join():
                                                                 #         * feed -> class attribute
             if self.foodLevel >= 70 and tryFeed:                #         * & -> "and", othervise py wont understand
                 self.feed = False
-                self.mood = 'happy'                                
+                self.mood = 'ヽ(^o^)ノ'                                
             elif self.foodLevel > 0 and tryFeed:
                 self.foodLevel += 30
                 self.feed = True
-                self.mood = 'happy'
+                self.mood = 'ヽ(^o^)ノ'
             elif self.foodLevel < 30 and self.foodLevel > 0:
-                self.mood = 'angry'
+                self.mood = 'ヽ(ಠ_ಠ)ノ'
             elif self.foodLevel <= 0:           # When foodLevel is going below zero, mood will always 
-                self.mood = 'dead'              # become angry and pet will never be dead.
+                self.mood = ' †'              # become angry and pet will never be dead.
                                                 # Solution: interval on line 33.
     
             #return [self.foodLevel, mood, feed]
@@ -61,7 +61,7 @@ def join():
 
     text1 = request.form['text1']
     user = Pet(text1)
-    user.food_level(True)
+    user.food_level(False)
 
     result = {
     "Hunger": text1+" is now this full : "+ str(user.foodLevel),
