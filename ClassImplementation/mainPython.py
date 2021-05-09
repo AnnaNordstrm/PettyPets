@@ -7,18 +7,18 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template("index.html")
+    return render_template("kaosIndex.html")
 
 @app.route('/join', methods=['GET','POST'])
 def join():
-    
+
     class Pet :
         def __init__ (self, name):
             self.name = name
             self.timeOfBirth = current_time()
-            self.foodLevel = 4
+            self.foodLevel = 40
             self.lastFed = current_time()
-            self.mood = 'ヽ(ಠ_ಠ)ノ'
+            self.mood = "angry"
             self.feed = False
 
 
@@ -35,39 +35,31 @@ def join():
                                                                 #         * feed -> class attribute
             if self.foodLevel >= 70 and tryFeed:                #         * & -> "and", othervise py wont understand
                 self.feed = False
-                self.mood = 'ヽ(^o^)ノ'                                
+                self.mood = 'happy'                                
             elif self.foodLevel > 0 and tryFeed:
                 self.foodLevel += 30
                 self.feed = True
-                self.mood = 'ヽ(^o^)ノ'
+                self.mood = 'happy'
             elif self.foodLevel < 30 and self.foodLevel > 0:
-                self.mood = 'ヽ(ಠ_ಠ)ノ'
+                self.mood = 'angry'
             elif self.foodLevel <= 0:           # When foodLevel is going below zero, mood will always 
-                self.mood = ' †'              # become angry and pet will never be dead.
+                self.mood = 'dead'              # become angry and pet will never be dead.
                                                 # Solution: interval on line 33.
-    
-            #return [self.foodLevel, mood, feed]
-            #return self.foodLevel, self.mood
 
         def sleep_level():
             pass
 
 
-        def pet_level():
-            pass
 
+    text1 = request.form['text1']           # Är det månne här som input från html kopplas till python?
+    user = Pet(text1)                       # Skapar en instans av klassen Pet
+    user.food_level(False)                  # Kör food_level 
 
-
-
-    text1 = request.form['text1']
-    user = Pet(text1)
-    user.food_level(False)
 
     result = {
-    "Hunger": text1+" is now this full : "+ str(user.foodLevel),
-    "Mood" : text1+ " is now "+ user.mood
-            }
-    return jsonify(result=result)
+    "Mood" : user.mood
+    }
+    return jsonify(esult=result)
 if __name__ == '__main__':
     app.run(debug=True)
 
