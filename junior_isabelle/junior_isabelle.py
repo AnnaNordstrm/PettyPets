@@ -1,10 +1,6 @@
-import time
-from deltatime import delta_time
-from get_time import *
 from flask import Flask, request, render_template, jsonify
 
 app = Flask(__name__)
-pets = ["helo"]             # Creates a list to store Pets in, with a 0th element to begin with 
 
 class Pet :
         def __init__ (self):
@@ -42,13 +38,18 @@ class Pet :
 
 
 
+
 @app.route('/')
+def sign_in():
+    return render_template('home_isabelle.html')
+
+@app.route('/sign_up')
+def sign_up():
+    return render_template('home_isabelle.html')
+
+@app.route('/home')
 def home():
-    return render_template("kaosIndex.html")
-
-
-@app.route('/join', methods=['GET','POST'])
-def join():
+    return render_template('home_isabelle.html')
 
     text1 = request.form['text1']
     
@@ -64,10 +65,22 @@ def join():
         result = {
             "Mood" : pets[0].mood,
         }
-    print(len(pets))
+    
 
     return jsonify(esult=result)
 
+
+@app.route('/jokes')
+def jokes():
+    return render_template('home_isabelle.html')
+
+@app.route('/about')
+def about():
+    return render_template('home_isabelle.html')
+
+@app.route('/sign_out')
+def sign_out():
+    return render_template('home_isabelle.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
-

@@ -7,19 +7,20 @@
 </head>
 
 <body>
-<!--________________________Kopierat från home originalet_______________________________________-->
+<!--________________________Kopierat från home originalet_______________________________________
     <p>
         Let's name your pet! <br><br>
             Name: <input type="text" id="text1"><br/>
 
-            <button id="clicked" onclick="eating()">
+_______________________________________________________________-->        
+            <button id="clicked" onclick="eating(1)">
                 Create pet
             </button>
     </p>
 
-<!--_______________________________________________________________-->
-    <button onclick="eating()">EAT</button>
-    <button onclick="sleeping()">SLEEP</button>
+
+    <button onclick="eating(2)">EAT</button>
+    <button onclick="check(3)">CHECK MOOD</button> 
 
     <div><iframe id="x" src="https://giphy.com/embed/KZMWLuOepc88Q6a4jU"></iframe><p><a href="https://giphy.com/gifs/sandiegozoo-funny-happy-3o7aD6vQ4qVEYsuwQo">via GIPHY</a></p>
     </div>
@@ -90,18 +91,16 @@
         }
         return "stop"
     }
-
-    function eating() {
+// TODO: Byt namn på eating, eller dela helt enkelt upp det
+    eating = (val) => {
         // change level of fullnes by calling for tryFeed in food_level.py. Has now been implemented.
-
-        var text1 = $('#text1').val();
-
+        var text1 = val
         $.ajax(
             {
                 url: "/join",
                 type: "POST",
-                data: {
-                    text1: text1,
+                data: {  
+                    text1: text1
                 }
             }).done((response) => {
             var html = "<p> Result : </p>";
@@ -125,20 +124,34 @@
         })
     })
 
-    function sleeping() {
-        // change level of sleepiness by calling for relevant python function. Has yet to be implemented.
-
-        document.getElementById("x").src="https://giphy.com/embed/qozauafWRlIxG";
-        var animate_sleeping = timer(4);
-        if (animate_sleeping == "stop") {
+    check = (val) => {
+        // Updates the user on how hungry their pet is, without changing anything
+        var text1 = val
+        $.ajax(
+            {
+                url: "/join",
+                type: "POST",
+                data: {  
+                    text1: text1
+                }
+            }).done((response) => {
+            var html = "<p> Result : </p>";
+            response = response.esult;
+            $.each(response, (key, val) => {
+                html += "<p>" + key + ": " + val + "</p>"
+        $(".results").append(html);
+        //document.getElementById("x").src="https://giphy.com/embed/qozauafWRlIxG";
+        //var animate_sleeping = timer(4);
+        //if (animate_sleeping == "stop") {
             // go back to normal gif
-            document.getElementById("x").src="https://giphy.com/embed/KZMWLuOepc88Q6a4jU";
-        }
-    
- 
-        };
-    };
+            //document.getElementById("x").src="https://giphy.com/embed/KZMWLuOepc88Q6a4jU";
+        //}
 
+            
+        })    
+    })
+    }
+    }
 </script>
 
 </body>
