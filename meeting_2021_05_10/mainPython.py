@@ -15,7 +15,7 @@ def join():
 
     class Pet :
         def __init__ (self):
-            self.name = Lemmy
+            self.name = "Lemmy"
             self.timeOfBirth = current_time()
             self.foodLevel =-1
             self.lastFed = current_time()
