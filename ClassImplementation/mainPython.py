@@ -16,7 +16,7 @@ def join():
         def __init__ (self, name):
             self.name = name
             self.timeOfBirth = current_time()
-            self.foodLevel = 40
+            self.foodLevel =-1
             self.lastFed = current_time()
             self.mood = "angry"
             self.feed = False
@@ -49,17 +49,16 @@ def join():
         def sleep_level():
             pass
 
-
-
-    text1 = request.form['text1']           # Är det månne här som input från html kopplas till python?
-    user = Pet(text1)                       # Skapar en instans av klassen Pet
-    user.food_level(False)                  # Kör food_level 
-
+    text1 = request.form['text1']           
+    user = Pet(text1)                       
+    user.food_level(False)                  
 
     result = {
     "Mood" : user.mood
     }
+
     return jsonify(esult=result)
+
 if __name__ == '__main__':
     app.run(debug=True)
 
