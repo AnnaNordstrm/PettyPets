@@ -1,4 +1,4 @@
-﻿
+﻿﻿
 
 var a_joke = ["I wondered why the frisbee was getting bigger...", "then it hit me."]; 
 

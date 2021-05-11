@@ -9,7 +9,7 @@ class Pet :
         def __init__ (self):
             self.name = "Lemmy"
             self.timeOfBirth = current_time()
-            self.foodLevel = 30
+            self.foodLevel = 20
             self.lastFed = current_time()
             self.mood = "angry"
             self.feed = False
