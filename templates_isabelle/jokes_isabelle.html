@@ -70,6 +70,57 @@ body {
   padding: 20px;
 }
 
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+  font-family: 'Aldrich'
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for all buttons */
+button {
+  padding: 14px 20px;
+  margin: auto;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+  font-family: 'Aldrich'
+}
+
+button:hover {
+  opacity:1;
+}
+
+.send_button {
+  width: 20%;
+  background-color: rgb(76,83,84);
+  text-align: center;
+  display: block;
+  color: white;
+}
+
+/* Add padding to container elements */
+.container {
+  padding: 0em 20em;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
 </style>
 </head>
 
@@ -82,12 +133,12 @@ body {
             <img src="static/petty_logo.jpg" width="200" height="50">
         </div>
     </a>
-    <a class="active" href="/home">
+    <a class="home" href="/home">
         <div class="home_icon">
             <img src="static/outline_home_black_24dp.jpg">
         </div>
     </a>
-    <a class="jokes" href="/jokes">
+    <a class="active" href="/jokes">
         <div class="tooltip">
             <div class="jokes_icon">
                 <img src="static/outline_jokes_black_24dp.jpg">
@@ -122,27 +173,23 @@ body {
     </div>
 </div>
 
-<div class="row2">
+<!-- Click the "Submit" button and the form-data will be sent to a page on the
+server called "action_page.php"-->
 
-  <div class="column">
-      <form class="feed_button">
-          <input type="image" src="static/feed_button.jpg" height="70" width="auto">
-      </form>
-  </div>
+<!-- action="/action_page.php"-->
 
-  <div class="column">
-      <form class="sleep_button">
-          <input type="image" src="static/sleep_button.jpg" height="70" width="auto">
-      </form>
-  </div>
+<form>
+    <div class="container">
+        <label id="build_up"><b>Build up</b></label>
+        <input type="text" placeholder="Enter build up" name="punch_line">
 
-  <div class="column">
-      <form class="pet_button">
-          <input type="image" src="static/pet_button.jpg" height="70" width="auto">
-      </form>
-  </div>
+        <label id="punch_line"><b>Punch line</b></label>
+        <input type="text" placeholder="Enter punch line" name="punch_line">
 
-</div>
+        <div class="clearfix">
+            <button type="submit" onclick="location.href='jokes'" class="send_button">Send</button>
+        </div>
+</form>
 
 </body>
 
