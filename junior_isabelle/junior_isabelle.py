@@ -2,15 +2,18 @@ from flask import Flask, request, render_template, jsonify
 import time
 from deltatime import delta_time
 from get_time import *
+import thread
 
 app = Flask(__name__)
+
+
 
 class Pet :
         def __init__ (self):
             self.name = "Lemmy"
             self.timeOfBirth = current_time()
             self.foodLevel = 20
-            self.lastFed = current_time()
+            self.lastFedCheck = current_time()
             self.mood = "angry"
             self.feed = False
 
@@ -23,22 +26,34 @@ class Pet :
         """
         def food_level(self, tryFeed):                          
                                                                 
-            deltatime = delta_time(self.lastFed)[0]             
-            self.foodLevel = self.foodLevel-(0.05*deltatime)    
+            deltatime = delta_time(self.lastFedCheck)[0]             
+            self.foodLevel = self.foodLevel-(3*deltatime)    
                                                                 
             if self.foodLevel >= 70 and tryFeed:                
                 self.feed = False
-                self.mood = 'happy'                                
+                self.mood = 'happy'
+                self.lastFedCheck = current_time()                                
             elif self.foodLevel > 0 and tryFeed:
                 self.foodLevel += 30
                 self.feed = True
                 self.mood = 'happy'
+                self.lastFedCheck = current_time()
             elif self.foodLevel < 30 and self.foodLevel > 0:
                 self.mood = 'angry'
+                self.lastFedCheck = current_time()
             elif self.foodLevel <= 0:           
-                self.mood = 'dead'              
-                                                
-pets = [Pet()]
+                self.mood = 'dead'
+                self.lastFedCheck = current_time()              
+
+
+pets = Pet()
+
+def function(arg):
+    while arg:
+        a = pets.food_level(False)
+        print(pets.foodLevel)
+        time.sleep(3)
+    
 
 @app.route('/')
 def sign_in():
@@ -86,3 +101,7 @@ def sign_out():
 
 if __name__ == '__main__':
     app.run(debug=True)
+    thread = Thread(target=function, args=(True))
+    thread.start()
+    thread.join()
+
