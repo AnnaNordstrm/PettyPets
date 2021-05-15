@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <Title>Petty Pet</Title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href='https://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet'>
@@ -138,6 +139,31 @@ body {
   display: block;
   font-size: 50px;
 }
+
+.feed_button {
+  background-color: black;
+}
+
+.sleep_button {
+  background-color: black;
+}
+
+.pet_button {
+  background-color: black;
+}
+
+.output_text {
+  position: absolute;
+  top: 80px;
+  left: 60px;
+  width: 250px;
+}
+
+.output_container {
+  position: relative;
+  color: black;
+}
+
 </style>
 
 </head>
@@ -148,27 +174,27 @@ body {
 
     <a class="petty_pet" href="/home">
         <div class="petty_pet_icon">
-            <img src="static/petty_logo.jpg" width="200" height="50">
+            <img src="static/petty_pet_logo.jpg" width="200" height="50">
         </div>
     </a>
     <a class="active" href="/home">
         <div class="home_icon">
-            <img src="static/outline_home_black_24dp.jpg">
+            <img src="static/home_icon.jpg">
         </div>
     </a>
     <a class="jokes" href="/jokes">
         <div class="jokes_icon">
-            <img src="static/outline_jokes_black_24dp.jpg">
+            <img src="static/jokes_icon.jpg">
         </div>
     </a>
     <a class="about" href="/about">
         <div class="about_icon">
-            <img src="static/outline_about_black_24dp.jpg">
+            <img src="static/about_icon.jpg">
         </div>
     </a>
     <a class="sign_out" href="/sign-out">
         <div class="sign_out_icon">
-            <img src="static/outline_sign_out_black_24dp.jpg">
+            <img src="static/sign_out_icon.jpg">
         </div>
     </a>
 
@@ -190,52 +216,79 @@ body {
 <div class="row1">
 
     <div class="column left">
-        <img src="static/pet_image.jpg" height="250" width="auto">
+        <input id="pet_image" type="image" src="static/pet_neutral.gif" height="300" width="300">
     </div>
     <div class="column right" id="output_bubble">
-        <img src="static/bubble.jpg" height="auto" width="400">
+        <div class="output_container">
+            <img src="static/output_bubble.jpg" height="auto" width="400">
+            <div class="output_text">
+                <div id="output_text">Hello! My name is Kung Julian. You can click on the buttons to take care of me.</div>
+            </div>
+        </div>
     </div>
 </div>
 
 <div class="row2">
 
   <div class="column">
-      <form class="feed_button">
+      <button class="feed_button">
           <div class="btn btn-primary tooltip">
-              <input type="image" src="static/feed_button.jpg" height="70" width="auto">
+              <input type="image" src="static/feed_button.jpg" onclick="changeToEating()" height="70" width="auto">
               <div class="bottom">
                   <p>Feed the pet</p>
                   <i></i>
               </div>
           </div>
-      </form>
+      </button>
   </div>
 
   <div class="column">
-      <form class="sleep_button">
+      <button class="sleep_button">
           <div class="btn btn-primary tooltip">
-          <input type="image" src="static/sleep_button.jpg" height="70" width="auto">
+          <input id="sleep_button" type="image" src="static/sleep_button.jpg" onclick="changeToSleeping()" height="70" width="auto">
               <div class="bottom">
                   <p>Put to sleep</p>
                   <i></i>
               </div>
           </div>
-      </form>
+      </button>
   </div>
 
   <div class="column">
-      <form class="pet_button">
+      <button class="pet_button">
           <div class="btn btn-primary tooltip">
-          <input type="image" src="static/pet_button.jpg" height="70" width="auto">
+          <input id="pet_button" type="image" src="static/pet_button.jpg" onclick="changeToPet()" height="70" width="auto">
               <div class="bottom">
                   <p>Pet the pet</p>
                   <i></i>
               </div>
           </div>
-      </form>
+      </button>
   </div>
 
 </div>
+
+<!--<script src="static/script_main.js"></script>-->
+
+<script>
+
+function changeToEating() {
+    document.getElementById("pet_image").src = "static/pet_eating.gif";
+    document.getElementById("output_text").innerHTML = "Thanks for feeding me!";
+}
+
+function changeToSleeping() {
+    document.getElementById("pet_image").src = "static/pet_sleeping.jpg";
+    document.getElementById("output_text").innerHTML = "I'm going to sleep. Good night!";
+}
+
+function changeToPet() {
+    document.getElementById("pet_image").src = "static/pet_pet.gif";
+    document.getElementById("output_text").innerHTML = "Thanks for petting me!";
+}
+
+</script>
+
 
 </body>
 
