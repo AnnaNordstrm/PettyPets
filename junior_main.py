@@ -1,7 +1,10 @@
 from flask import Flask, request, render_template, jsonify
-import time
-from deltatime import delta_time
-from get_time import *
+#from middleware_main import Pet, joke_provider
+#import time
+#from deltatime import delta_time
+#from get_time import *
+#import json
+#from random import randint
 
 app = Flask(__name__)
 
@@ -15,21 +18,22 @@ def sign_up():
 
 @app.route('/home', methods=['GET','POST'])
 def home():
-    text1 = request.form['text1']
-    print(text1)
-    if int(text1) == 1:
-        pets[0] = Pet()
-        result = {"message": "pet is created in a list!"}
-    elif int(text1) == 2:
-        pets[0].food_level(True)
-        result = {
-            "Mood": pets[0].mood,
-        }
-    elif int(text1) == 3:
-        result = {
-            "Mood": pets[0].mood,
-        }
-    return (render_template('home_main.html'), jsonify(esult=result))
+    # text1 = request.form['text1']
+    # print(text1)
+    # if int(text1) == 1:
+    #     pets[0] = Pet()
+    #     result = {"message": "pet is created in a list!"}
+    # elif int(text1) == 2:
+    #     pets[0].food_level(True)
+    #     result = {
+    #         "Mood": pets[0].mood,
+    #     }
+    # elif int(text1) == 3:
+    #     result = {
+    #         "Mood": pets[0].mood,
+    #     }
+    return render_template('home_main.html')
+    #return jsonify(esult=result))
 
 @app.route('/jokes', methods=['GET','POST'])
 def jokes():
