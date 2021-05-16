@@ -41,9 +41,9 @@ body {
 }
 
 .row1 {
-  text-align: center;
   display: block;
-  margin-top: 50px;
+  margin-top: 0px;
+  margin-bottom: 50px;
 }
 
 .column {
@@ -51,7 +51,7 @@ body {
 }
 
 .left {
-  text-align: center;
+  margin-left: 30%
 }
 
 .right {
@@ -61,13 +61,13 @@ body {
 .row2 {
   text-align: center;
   display: block;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 0px;
+  margin-bottom: auto;
 }
 
 .column {
   display: inline-block;
-  padding: 20px;
+  padding: 10px;
 }
 
 /* Full-width input fields */
@@ -87,7 +87,7 @@ input[type=text]:focus, input[type=password]:focus {
 }
 
 /* Set a style for all buttons */
-button {
+.send_button {
   padding: 14px 20px;
   margin: auto;
   border: none;
@@ -121,6 +121,85 @@ button:hover {
   display: table;
 }
 
+.pet_name {
+  text-align: center;
+  font-size: 50px;
+  margin-top: 50px;
+}
+
+.pet_name_button {
+  background-color: black;
+  font-family: 'Aldrich';
+  width: 100%;
+  color: white;
+  text-align: center;
+  display: block;
+  font-size: 50px;
+}
+
+.output_text {
+  position: absolute;
+  top: 60px;
+  left: 30px;
+  width: 250px;
+}
+
+.output_container {
+  position: relative;
+  color: black;
+}
+
+.tooltip {
+    display:inline-block;
+    position:relative;
+    border-bottom:1px dotted #666;
+    text-align:left;
+}
+
+.tooltip .bottom {
+    min-width:120px;
+    max-width:150px;
+    top:80px;
+    left:50%;
+    text-align:center;
+    transform:translate(-50%, 0);
+    padding:5px 20px;
+    color:#FFFFFF;
+    background-color:rgb(76,83,84);
+    font-weight:normal;
+    font-size:12px;
+    border-radius:8px;
+    position:absolute;
+    box-sizing:border-box;
+    box-shadow:0 1px 8px rgba(0,0,0,0.5);
+    visibility:hidden; opacity:0; transition:opacity 0.8s;
+}
+
+.tooltip:hover .bottom {
+    visibility:visible; opacity:1;
+}
+
+.tooltip .bottom i {
+    position:absolute;
+    bottom:100%;
+    left:50%;
+    margin-left:-12px;
+    width:24px;
+    height:12px;
+    overflow:hidden;
+}
+
+.tooltip .bottom i::after {
+    content:'';
+    position:absolute;
+    width:12px;
+    height:12px;
+    left:50%;
+    transform:translate(-50%,50%) rotate(45deg);
+    background-color:rgb(76,83,84);
+    box-shadow:0 1px 8px rgba(0,0,0,0.5);
+}
+
 </style>
 </head>
 
@@ -130,53 +209,61 @@ button:hover {
 
     <a class="petty_pet" href="/home">
         <div class="petty_pet_icon">
-            <img src="static/petty_logo.jpg" width="200" height="50">
+            <img src="static/petty_pet_logo.jpg" width="200" height="50">
         </div>
     </a>
-    <a class="home" href="/home">
+    <a class="active" href="/home">
         <div class="home_icon">
-            <img src="static/outline_home_black_24dp.jpg">
+            <img src="static/home_icon.jpg">
         </div>
     </a>
-    <a class="active" href="/jokes">
-        <div class="tooltip">
-            <div class="jokes_icon">
-                <img src="static/outline_jokes_black_24dp.jpg">
-            </div>
-            <span class="tooltiptext">Jokes</span>
+    <a class="jokes" href="/jokes">
+        <div class="jokes_icon">
+            <img src="static/jokes_icon.jpg">
         </div>
     </a>
     <a class="about" href="/about">
         <div class="about_icon">
-            <img src="static/outline_about_black_24dp.jpg">
+            <img src="static/about_icon.jpg">
         </div>
     </a>
     <a class="sign_out" href="/sign-out">
         <div class="sign_out_icon">
-            <img src="static/outline_sign_out_black_24dp.jpg">
+            <img src="static/sign_out_icon.jpg">
         </div>
     </a>
 
 </div>
 
-<p style="text-align:center; font-size:50px;">Kung Julian</p>
+<div class="pet_name">
+    <div class="btn btn-primary tooltip">
+        <button type="button" class="pet_name_button">Kung Julian</button>
+        <div class="bottom">
+            <p>Rename pet</p>
+            <i></i>
+        </div>
+    </div>
+</div>
 
-<p style="text-align:center; font-size:20px;">2 years old</p>
+<br>
+<p style="text-align:center; font-size:20px;">Age: 2 years old<p>
 
 <div class="row1">
 
     <div class="column left">
-        <img src="static/pet_image.jpg" height="200" width="200">
+        <input id="pet_image" type="image" src="static/pet_neutral.gif" height="250" width="250">
     </div>
     <div class="column right" id="output_bubble">
-        <img src="static/bubble.jpg" height="auto" width="300">
+        <div class="output_container">
+            <img src="static/output_bubble.gif" height="auto" width="300">
+            <div class="output_text">
+                <div id="output_text">Hello! <br><br>
+                    My name is Kung Julian. <br><br>
+                    Send me a funny joke and you will get points.</div>
+            </div>
+        </div>
     </div>
 </div>
-
-<!-- Click the "Submit" button and the form-data will be sent to a page on the
-server called "action_page.php"-->
-
-<!-- action="/action_page.php"-->
 
 <form>
     <div class="container">
@@ -189,8 +276,10 @@ server called "action_page.php"-->
         <div class="clearfix">
             <button type="submit" onclick="location.href='jokes'" class="send_button">Send</button>
         </div>
+    </div>
 </form>
 
+<br><br>
 <!--    <div style="background-color: blue; color: white;"id="talking_box">-->
 <!--        <p id="joke"></p>-->
 <!--        <p id="buildup"></p>-->

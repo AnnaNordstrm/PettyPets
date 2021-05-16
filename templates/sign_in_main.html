@@ -119,20 +119,13 @@ button:hover {
     <h1 style="text-align:center; font-size:40px;">Petty Pet</h1>
     <h2 style="text-align:center; font-size:16px;">Welcome back! Let's log in on your account</h2><br/>
 
-    <!-- <form action="/name_page.php"> -->
     <form action="name_page.php" method="post" style="border:1px solid #ccc">
         <div class="container">
-           <!-- <label id="username"><b>Username</b></label> -->
-            <!-- required */ -->
-           <!-- <input type="text" placeholder="Enter username" name="username"> -->
+            <label id="username"><b>Username</b></label>
+            <input type="text" placeholder="Enter username" name="username" required>
 
             <label id="pet_name"><b>Pet's name</b></label>
-            <!-- required */ -->
-            <input type="text" placeholder="Enter pet's name" name="pet_name" required>
-            <!-- for */ -->
-            <label id="password"><b>Password</b></label>
-            <!-- required */ -->
-            <input type="password" placeholder="Enter password" name="password" required>
+            <input type="password" placeholder="Enter pet's name" name="pet_name" required>
         </div>
              <div class="clearfix">
                  <button type="submit" class="sign_in_button">Sign in</button>
@@ -150,5 +143,8 @@ button:hover {
 
 </div>
 
+</div>
+
 </body>
+
 </html>
