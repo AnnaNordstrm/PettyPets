@@ -1,6 +1,4 @@
-
-
-var a_joke = ["I wondered why the frisbee was getting bigger...", "then it hit me."]; 
+﻿var a_joke = ["I wondered why the frisbee was getting bigger...", "then it hit me."];
 
     function tell_buildup() {
         // assumes that the joke consists of a list.
@@ -13,8 +11,8 @@ var a_joke = ["I wondered why the frisbee was getting bigger...", "then it hit m
     }
 
     function clear_joke() {
-        // removes the joke from the screen. 
-        
+        // removes the joke from the screen.
+
         document.getElementById("joke").innerHTML = "";
         document.getElementById("buildup").innerHTML = "";
         document.getElementById("punchline").innerHTML = "";
@@ -40,11 +38,11 @@ var a_joke = ["I wondered why the frisbee was getting bigger...", "then it hit m
         var counting = true;
         while (counting == true){
             endTime = new Date();
-            var timeDiff = endTime - startTime; //in ms 
-            // strip the ms 
-            timeDiff /= 1000; 
+            var timeDiff = endTime - startTime; //in ms
+            // strip the ms
+            timeDiff /= 1000;
 
-            // get seconds 
+            // get seconds
             var seconds = Math.round(timeDiff);
             if (seconds > time) {
                 counting = false;
@@ -61,7 +59,7 @@ var a_joke = ["I wondered why the frisbee was getting bigger...", "then it hit m
             {
                 url: "/home",
                 type: "POST",
-                data: {  
+                data: {
                     text1: text1
                 }
             }).done((response) => {
@@ -72,9 +70,9 @@ var a_joke = ["I wondered why the frisbee was getting bigger...", "then it hit m
                 console.log(html)
                 if (val == "dead") {
                 document.getElementById("pet_image").src = "https://giphy.com/embed/krMpiV41eo264"
-                
+
             } else {
-            
+
             document.getElementById("pet_image").src="https://giphy.com/embed/bWFSMCn6BzM3fyRCCg"; // can you have ; here?
             var animate_eating = timer(4);
             if (animate_eating == "stop") {
@@ -94,7 +92,7 @@ var a_joke = ["I wondered why the frisbee was getting bigger...", "then it hit m
             {
                 url: "/join",
                 type: "POST",
-                data: {  
+                data: {
                     text1: text1
                 }
             }).done((response) => {
@@ -110,12 +108,12 @@ var a_joke = ["I wondered why the frisbee was getting bigger...", "then it hit m
             //document.getElementById("x").src="https://giphy.com/embed/KZMWLuOepc88Q6a4jU";
         //}
 
-            
-        })    
+
+        })
     })
     }
     }
 window.onload=function(){
     document.getElementById('feed_button').addEventListener("click", eating("2"));
     }
-    
+
