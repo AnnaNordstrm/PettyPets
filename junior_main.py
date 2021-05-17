@@ -52,6 +52,8 @@ def sign_in():
 def sign_up():
     return render_template('sign_up_main.html')
 
+"""
+ANNAS GAMLA /home
 @app.route('/home', methods=['GET','POST'])
 def home():
     # text1 = request.form['text1']
@@ -59,17 +61,43 @@ def home():
     # if int(text1) == 1:
     #     pets[0] = Pet()
     #     result = {"message": "pet is created in a list!"}
-    # elif int(text1) == 2:
-    #     pets[0].food_level(True)
-    #     result = {
-    #         "Mood": pets[0].mood,
-    #     }
+    # if int(text1) == 2:
+         pets[0].food_level(True)
+         result = {
+             "Mood": pets[0].mood,
+         }
     # elif int(text1) == 3:
     #     result = {
     #         "Mood": pets[0].mood,
     #     }
-    return render_template('home_main.html')
+    return render_template('home_main.html', jsonify(esult=result))
     # return jsonify(esult=result))
+"""
+
+
+@app.route('/home', methods=['GET','POST'])
+def home():
+    return render_template('home_main.html')
+
+
+@app.route('/home_1', methods=['GET','POST'])
+# ska kallas från javascript
+def home_1():
+    button_check = request.form['user_action'] #kontrollerar om användare tryckt på knapp
+    print(button_check)
+    if button_check == 1:
+        pets[0].food_level(True)
+    else:
+        pets[0].food_level(False)
+    result = {
+        "Mood": pets[0].mood,
+        "Feed": pets[0].feed, #returneras True eller False beroende på om den äter eller inte
+        # behöver implementera sleep och pet.
+        }
+    return render_template('home_main.html', status=result)
+
+
+
 
 @app.route('/jokes', methods=['GET','POST'])
 def jokes():
