@@ -17,29 +17,35 @@ class Pet:
       self.mood = "angry"
       self.feed = False
 
-   """
-   Purpose: To make the object hungrier with time, and if right conditions: feeds the pet +30
-   Parameters:
-   tryFeed: Boolean, takes in whether user tries to feed the pet.
-   Returns: an updated self, mood and feed
-   """
 
    def food_level(self, tryFeed):
+    """
+    Purpose: To make the object hungrier with time, and if right conditions: feeds the pet +30
+    Parameters:
+    tryFeed: Boolean, takes in whether user tries to feed the pet.
+    Returns: an updated self, mood and feed
+    """
+    deltatime = delta_time(self.lastFed)[0]
+    self.foodLevel = self.foodLevel - (0.05 * deltatime)
 
-      deltatime = delta_time(self.lastFed)[0]
-      self.foodLevel = self.foodLevel - (0.05 * deltatime)
+    if self.foodLevel >= 70 and tryFeed:
+        self.feed = False
+        self.mood = 'happy'
+    elif self.foodLevel > 0 and tryFeed:
+        self.foodLevel += 30
+        self.feed = True
+        self.mood = 'happy'
+    elif self.foodLevel < 30 and self.foodLevel > 0:
+        self.mood = 'angry'
+    elif self.foodLevel <= 0:
+        self.mood = 'dead'
 
-      if self.foodLevel >= 70 and tryFeed:
-         self.feed = False
-         self.mood = 'happy'
-      elif self.foodLevel > 0 and tryFeed:
-         self.foodLevel += 30
-         self.feed = True
-         self.mood = 'happy'
-      elif self.foodLevel < 30 and self.foodLevel > 0:
-         self.mood = 'angry'
-      elif self.foodLevel <= 0:
-         self.mood = 'dead'
+    def pet_level(self):
+        pass
+
+    def sleep_level(self):
+        pass
+
 
 
 pets = [Pet()]
@@ -52,38 +58,16 @@ def sign_in():
 def sign_up():
     return render_template('sign_up_main.html')
 
-"""
-ANNAS GAMLA /home
-@app.route('/home', methods=['GET','POST'])
-def home():
-    # text1 = request.form['text1']
-    # print(text1)
-    # if int(text1) == 1:
-    #     pets[0] = Pet()
-    #     result = {"message": "pet is created in a list!"}
-    # if int(text1) == 2:
-         pets[0].food_level(True)
-         result = {
-             "Mood": pets[0].mood,
-         }
-    # elif int(text1) == 3:
-    #     result = {
-    #         "Mood": pets[0].mood,
-    #     }
-    return render_template('home_main.html', jsonify(esult=result))
-    # return jsonify(esult=result))
-"""
-
 
 @app.route('/home', methods=['GET','POST'])
 def home():
-    return render_template('home_main.html')
+    return render_template('home_main.html')   #/home splittras till 2 routs, eftersom att vi inte vill att koden i /home_1 körs varje gång
 
 
 @app.route('/home_1', methods=['GET','POST'])
 # ska kallas från javascript
 def home_1():
-    button_check = request.form['user_action'] #kontrollerar om användare tryckt på knapp
+    button_check = request.form['user_action'] #kontrollerar om användare tryckt på knapp och kollar i så fall vilken
     print(button_check)
     if button_check == 1:
         pets[0].food_level(True)
@@ -113,3 +97,27 @@ def sign_out():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
+"""
+ANNAS GAMLA /home
+@app.route('/home', methods=['GET','POST'])
+def home():
+    # text1 = request.form['text1']
+    # print(text1)
+    # if int(text1) == 1:
+    #     pets[0] = Pet()
+    #     result = {"message": "pet is created in a list!"}
+    # if int(text1) == 2:
+         pets[0].food_level(True)
+         result = {
+             "Mood": pets[0].mood,
+         }
+    # elif int(text1) == 3:
+    #     result = {
+    #         "Mood": pets[0].mood,
+    #     }
+    return render_template('home_main.html', jsonify(esult=result))
+    # return jsonify(esult=result))
+"""
