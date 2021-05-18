@@ -276,10 +276,10 @@ body {
 
 function gif_chooser(mood, feed, sleep, pet) {
     if (mood == "dead") {
-        setTimeout(changeToDead(), 3000);}
-
+        }
     else if (feed == true) {
-        changeToEating(); }
+        changeToEating();
+        }
     else if (sleep == true) {
         changeToSleeping(); }
     else if (mood == "happy") {
@@ -337,7 +337,10 @@ function changeToPet() {
     document.getElementById("pet_image").src = "static/pet_pet.gif";
     document.getElementById("output_text").innerHTML = "Thanks for petting me!";
 }
-
+function changeToNeutral() {
+    document.getElementById("pet_image").src = "static/pet_neutral.gif";
+    document.getElementById("output_text").innerHTML = "Thanks for doing something!";
+}
 
 </script>
 
