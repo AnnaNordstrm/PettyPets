@@ -202,7 +202,7 @@ body {
 
 <div class="pet_name">
     <div class="btn btn-primary tooltip">
-        <button type="button" class="pet_name_button">Kung Julian</button>
+        <button type="button" class="pet_name_button">{{name}}</button>
         <div class="bottom">
             <p>Rename pet</p>
             <i></i>
@@ -274,7 +274,7 @@ body {
 
 <script>
 
-function gif_chooser(mood, feed, sleep, pet) {
+function gif_chooser(mood, feed, sleep, pet, joke) {
     if (mood == "dead") {
         }
     else if (feed == true) {
@@ -316,16 +316,19 @@ function interaction(val) {
             console.log(feed);
             mood = response["Mood"];
             console.log(mood);
-
+            buildup = response["buildup"]
+            punchline = response["punchline"]
+            joke = buildup + "\n" + punchline
             sleep =false;
             pet = false;
-            gif_chooser(mood,feed, sleep, pet)
+            gif_chooser(mood,feed, sleep, pet, joke)
         });
     };
 
 function changeToEating() {
     document.getElementById("pet_image").src = "static/pet_eating.gif";
-    document.getElementById("output_text").innerHTML = "Thanks for feeding me!";
+    document.getElementById("output_text").innerHTML = joke;
+
 }
 
 function changeToSleeping() {
@@ -347,7 +350,6 @@ function changeToNeutral() {
 
     <div class="results">
     </div>
-<p>he {{name}}</p>
 </body>
 
 </html>
