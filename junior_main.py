@@ -68,8 +68,7 @@ def home():
 # ska kallas från javascript
 def home_1():
     button_check = request.form['user_action'] #kontrollerar om användare tryckt på knapp och kollar i så fall vilken
-    print(button_check)
-    if button_check == 1:
+    if int(button_check) == 1:
         pets[0].food_level(True)
     else:
         pets[0].food_level(False)
@@ -78,7 +77,7 @@ def home_1():
         "Feed": pets[0].feed, #returneras True eller False beroende på om den äter eller inte
         # behöver implementera sleep och pet.
         }
-    return render_template('home_main.html', status=result)
+    return jsonify(result=result)
 
 
 
