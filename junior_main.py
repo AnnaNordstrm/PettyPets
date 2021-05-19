@@ -82,7 +82,8 @@ def home_1():
     result = {
         "Mood": pets[0].mood,
         "Feed": pets[0].feed,
-        "Joke": joke
+        "Joke": joke,
+        "Food_level": pets[0].foodLevel
         #
         #"buildup": joke["buildup"],
         #"punchline": joke["punchline"]
@@ -112,26 +113,3 @@ def sign_out():
 if __name__ == '__main__':
     app.run(debug=True)
 
-
-
-"""
-ANNAS GAMLA /home
-@app.route('/home', methods=['GET','POST'])
-def home():
-    # text1 = request.form['text1']
-    # print(text1)
-    # if int(text1) == 1:
-    #     pets[0] = Pet()
-    #     result = {"message": "pet is created in a list!"}
-    # if int(text1) == 2:
-         pets[0].food_level(True)
-         result = {
-             "Mood": pets[0].mood,
-         }
-    # elif int(text1) == 3:
-    #     result = {
-    #         "Mood": pets[0].mood,
-    #     }
-    return render_template('home_main.html', jsonify(esult=result))
-    # return jsonify(esult=result))
-"""
