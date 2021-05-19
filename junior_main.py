@@ -74,7 +74,6 @@ def home():
 # ska kallas från javascript
 def home_1():
     button_check = request.form['user_action'] #kontrollerar om användare tryckt på knapp och kollar i så fall vilken
-    # Ändrade till att jokeProvider används //Ebba
     joke = jokeProvider()
     if int(button_check) == 1:
         pets[0].food_level(True)
@@ -84,13 +83,13 @@ def home_1():
         "Mood": pets[0].mood,
         "Feed": pets[0].feed,
         "Joke": joke
-        # i o m att jokeProvider används är koden nedanför bortkommenterad // Ebba
+        #
         #"buildup": joke["buildup"],
-        # "punchline": joke["punchline"]
+        #"punchline": joke["punchline"]
         #returneras True eller False beroende på om den äter eller inte
         # behöver implementera sleep och pet.
         }
-    return jsonify(status = result)
+    return jsonify(result=result)
 
 
 
