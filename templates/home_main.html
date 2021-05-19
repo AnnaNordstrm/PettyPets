@@ -7,65 +7,6 @@
 
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script>
-/*
-function gif_chooser(mood, feed = False, sleep = False, pet = False) {
-    if (mood = "dead") {
-        changeToDead(); }
-    else if (feed = true) {
-        changeToEating(); }
-    else if (sleep = true) {
-        changeToSleeping(); }
-    else if (mood = "happy") {
-        changeToHappy();}
-    else if (mood = "angry"); {
-        changeToAngry(); }
-}
-*/
-
-
-//function interaction(type) {
-    interaction = (type) => {
-        var user_action = type;
-        // change level of fullnes by calling for tryFeed in food_level.py. Has now been implemented.
-        
-        console.log(user_action);
-        $.ajax(
-                {
-                    url: "/home_1",
-                    type: "POST",
-                    data: {  
-                        user_action: user_action
-                    }
-                }).done((response) => {
-                var html = "";
-                response = response.status;})
-                //console.log("hej")
-                //$.each(response, (key, val) => {
-                    //html += "<p>" + key + ": " + val + "</p>"
-                
-            //$(".results").append(html);
-
-
-/*    
-function changeToEating() {
-    document.getElementById("pet_image").src = "static/pet_eating.gif";
-    document.getElementById("output_text").innerHTML = "Thanks for feeding me!";
-}
-
-function changeToSleeping() {
-    document.getElementById("pet_image").src = "static/pet_sleeping.jpg";
-    document.getElementById("output_text").innerHTML = "I'm going to sleep. Good night!";
-}
-
-function changeToPet() {
-    document.getElementById("pet_image").src = "static/pet_pet.gif";
-    document.getElementById("output_text").innerHTML = "Thanks for petting me!";
-}
-*/
-    }
-</script>
-
 <Title>Petty Pet</Title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href='https://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet'>
@@ -229,8 +170,6 @@ body {
 
 <body>
 
-
-
 <div class="top_menu">
 
     <a class="petty_pet" href="/home">
@@ -263,7 +202,7 @@ body {
 
 <div class="pet_name">
     <div class="btn btn-primary tooltip">
-        <button type="button" class="pet_name_button">Kung Julian</button>
+        <button type="button" class="pet_name_button">{{name}}</button>
         <div class="bottom">
             <p>Rename pet</p>
             <i></i>
@@ -285,8 +224,7 @@ body {
             <div class="output_text">
                 <div id="output_text">Hello! <br><br>
                     My name is Kung Julian. <br><br>
-                    You can click on the buttons to take care of me.
-                </div>
+                    You can click on the buttons to take care of me.</div>
             </div>
         </div>
     </div>
@@ -295,10 +233,9 @@ body {
 <div class="row2">
 
   <div class="column">
-      <button class="feed_button" onclick="interaction(1)">
+      <button class="feed_button">
           <div class="btn btn-primary tooltip">
-              <input type="image" height="70" width="auto">
-              <img src="static/feed_button.jpg">
+              <input type="image" src="static/feed_button.jpg" onclick="interaction(1)" height="70" width="auto">
               <div class="bottom">
                   <p>Feed the pet</p>
                   <i></i>
@@ -379,35 +316,54 @@ function interaction(val) {
             console.log(feed);
             mood = response["Mood"];
             console.log(mood);
-            // buildup = response["buildup"]
-            //punchline = response["punchline"]
             joke = response["Joke"];
-            console.log(joke);
-            sleep =false;
+            //buildup = response["buildup"]
+            //punchline = response["punchline"]
+            // joke = buildup + "\n" + punchline
+            sleep = false;
             pet = false;
             gif_chooser(mood,feed, sleep, pet, joke)
         });
     };
 
-function changeToEating(joke) {
+    function changeToEating(joke) {
     document.getElementById("pet_image").src = "static/pet_eating.gif";
     
     // now tell joke
     var buildup = joke[0];
     var punchline = joke[1];
-    document.getElementById("output_text").innerHTML = buildup;
-
+    
+    window.setTimeout(function() {document.getElementById("pet_image").src = "static/happy.gif"}, 4000);
+    window.setTimeout(function() {document.getElementById("output_text").innerHTML = buildup;}, 4000);
+    
     var full_joke = buildup.concat("<br><br>", punchline);
-    window.setTimeout(function() {document.getElementById("output_text").innerHTML = full_joke}, 4000);
+    window.setTimeout(function() {document.getElementById("output_text").innerHTML = full_joke}, 8000);
     
     normal_text = "Hello! <br><br> My name is Kung Julian. <br><br>You can click on the buttons to take care of me." // LINE BREAK DOESNT WORK
-    window.setTimeout(function() {document.getElementById("output_text").innerHTML = normal_text}, 8000);
+    window.setTimeout(function() {document.getElementById("output_text").innerHTML = normal_text}, 12000);
 
 
 }
 
+function changeToSleeping() {
+    document.getElementById("pet_image").src = "static/pet_sleeping.jpg";
+    document.getElementById("output_text").innerHTML = "I'm going to sleep. Good night!";
+}
+
+function changeToPet() {
+    document.getElementById("pet_image").src = "static/pet_pet.gif";
+    document.getElementById("output_text").innerHTML = "Thanks for petting me!";
+}
+function changeToNeutral() {
+    document.getElementById("pet_image").src = "static/pet_neutral.gif";
+    document.getElementById("output_text").innerHTML = "Thanks for doing something!";
+}
+
 </script>
 
+
+    <div class="results">
+    </div>
 </body>
 
 </html>
