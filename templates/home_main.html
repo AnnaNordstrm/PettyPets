@@ -63,6 +63,7 @@ function changeToPet() {
     document.getElementById("output_text").innerHTML = "Thanks for petting me!";
 }
 */
+    }
 </script>
 
 <Title>Petty Pet</Title>
@@ -262,7 +263,7 @@ body {
 
 <div class="pet_name">
     <div class="btn btn-primary tooltip">
-        <button type="button" class="pet_name_button">{{name}}</button>
+        <button type="button" class="pet_name_button">Kung Julian</button>
         <div class="bottom">
             <p>Rename pet</p>
             <i></i>
@@ -334,82 +335,7 @@ body {
 <!--<script src="static/script_main.js"></script>-->
 
 
-function gif_chooser(mood, feed, sleep, pet, joke) {
-    if (mood == "dead") {
-        }
-    else if (feed == true) {
-        changeToEating();
-        }
-    else if (sleep == true) {
-        changeToSleeping(); }
-    else if (mood == "happy") {
-        changeToHappy();}
-    //else if (mood == "angry"); {
-        //changeToAngry(); }
 
-}
-
-function changeToDead() {
-
-}
-
-function interaction(val) {
-        // change level of fullnes by calling for tryFeed in food_level.py. Has now been implemented.
-        var user_action = val
-        console.log("hej")
-        $.ajax(
-            {
-                url: "/home_1",
-                type: "POST",
-                data: {  
-                    user_action: user_action
-                }
-          }).done((response) => {
-            //var html = "<p> RESULT : </p>";
-            response = response.result;
-            console.log(response)
-            //$.each(response, (key, val) => {
-               // html += "<p>" + key + ": " + val + "</p>";
-           // });
-            //$(".results").append(html);
-            feed = response["Feed"];
-            console.log(feed);
-            mood = response["Mood"];
-            console.log(mood);
-            buildup = response["buildup"]
-            punchline = response["punchline"]
-            joke = buildup + "\n" + punchline
-            sleep =false;
-            pet = false;
-            gif_chooser(mood,feed, sleep, pet, joke)
-        });
-    };
-
-function changeToEating() {
-    document.getElementById("pet_image").src = "static/pet_eating.gif";
-    document.getElementById("output_text").innerHTML = joke;
-
-}
-
-function changeToSleeping() {
-    document.getElementById("pet_image").src = "static/pet_sleeping.jpg";
-    document.getElementById("output_text").innerHTML = "I'm going to sleep. Good night!";
-}
-
-function changeToPet() {
-    document.getElementById("pet_image").src = "static/pet_pet.gif";
-    document.getElementById("output_text").innerHTML = "Thanks for petting me!";
-}
-function changeToNeutral() {
-    document.getElementById("pet_image").src = "static/pet_neutral.gif";
-    document.getElementById("output_text").innerHTML = "Thanks for doing something!";
-}
-
-</script>
-
-
-    <div class="results">
-    </div>
 </body>
 
 </html>
