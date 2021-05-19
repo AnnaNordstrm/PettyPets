@@ -224,7 +224,8 @@ body {
             <div class="output_text">
                 <div id="output_text">Hello! <br><br>
                     My name is Kung Julian. <br><br>
-                    You can click on the buttons to take care of me.</div>
+                    You can click on the buttons to take care of me.
+                </div>
             </div>
         </div>
     </div>
@@ -278,7 +279,7 @@ function gif_chooser(mood, feed, sleep, pet, joke) {
     if (mood == "dead") {
         }
     else if (feed == true) {
-        changeToEating();
+        changeToEating(joke);
         }
     else if (sleep == true) {
         changeToSleeping(); }
@@ -316,18 +317,30 @@ function interaction(val) {
             console.log(feed);
             mood = response["Mood"];
             console.log(mood);
-            buildup = response["buildup"]
-            punchline = response["punchline"]
-            joke = buildup + "\n" + punchline
+            // buildup = response["buildup"]
+            //punchline = response["punchline"]
+            joke = response["Joke"];
+            console.log(joke);
             sleep =false;
             pet = false;
             gif_chooser(mood,feed, sleep, pet, joke)
         });
     };
 
-function changeToEating() {
+function changeToEating(joke) {
     document.getElementById("pet_image").src = "static/pet_eating.gif";
-    document.getElementById("output_text").innerHTML = joke;
+    
+    // now tell joke
+    var buildup = joke[0];
+    var punchline = joke[1];
+    document.getElementById("output_text").innerHTML = buildup;
+
+    var full_joke = buildup.concat("<br><br>", punchline);
+    window.setTimeout(function() {document.getElementById("output_text").innerHTML = full_joke}, 4000);
+    
+    normal_text = "Hello! <br><br> My name is Kung Julian. <br><br>You can click on the buttons to take care of me." // LINE BREAK DOESNT WORK
+    window.setTimeout(function() {document.getElementById("output_text").innerHTML = normal_text}, 8000);
+
 
 }
 

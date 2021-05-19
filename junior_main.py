@@ -4,7 +4,8 @@ import time
 from datetime import datetime
 import json
 from random import randint
-from joker import joker
+# from joker import joker
+from joke_provider import jokeProvider
 
 app = Flask(__name__)
 
@@ -73,7 +74,8 @@ def home():
 # ska kallas från javascript
 def home_1():
     button_check = request.form['user_action'] #kontrollerar om användare tryckt på knapp och kollar i så fall vilken
-    joke = joker()
+    # Ändrade till att jokeProvider används //Ebba
+    joke = jokeProvider()
     if int(button_check) == 1:
         pets[0].food_level(True)
     else:
@@ -81,11 +83,14 @@ def home_1():
     result = {
         "Mood": pets[0].mood,
         "Feed": pets[0].feed,
-        "buildup": joke["buildup"],
-        "punchline": joke["punchline"]
+        "Joke": joke
+        # i o m att jokeProvider används är koden nedanför bortkommenterad // Ebba
+        #"buildup": joke["buildup"],
+        # "punchline": joke["punchline"]
         #returneras True eller False beroende på om den äter eller inte
         # behöver implementera sleep och pet.
         }
+    print(result.get("Joke"))
     return jsonify(result=result)
 
 
