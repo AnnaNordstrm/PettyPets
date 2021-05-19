@@ -90,8 +90,7 @@ def home_1():
         #returneras True eller False beroende på om den äter eller inte
         # behöver implementera sleep och pet.
         }
-    print(result.get("Joke"))
-    return jsonify(result=result)
+    return jsonify(status = result)
 
 
 
