@@ -4,6 +4,7 @@ import time
 from datetime import datetime
 import json
 from random import randint
+from joker import joker
 
 app = Flask(__name__)
 
@@ -58,24 +59,31 @@ def sign_in():
 def sign_up():
     return render_template('sign_up_main.html')
 
+@app.route('/namer', methods=['GET','POST'])
+def namer():
+    pets[0].name = (request.form.get("key"))
+    return render_template('home_main.html', name=pets[0].name)
 
 @app.route('/home', methods=['GET','POST'])
 def home():
-    return render_template('home_main.html')   #/home splittras till 2 routs, eftersom att vi inte vill att koden i /home_1 körs varje gång
+    return render_template('home_main.html', name=pets[0].name)   #/home splittras till 2 routs, eftersom att vi inte vill att koden i /home_1 körs varje gång
 
 
 @app.route('/home_1', methods=['GET','POST'])
 # ska kallas från javascript
 def home_1():
     button_check = request.form['user_action'] #kontrollerar om användare tryckt på knapp och kollar i så fall vilken
-    print(button_check)
-    if button_check == 1:
+    joke = joker()
+    if int(button_check) == 1:
         pets[0].food_level(True)
     else:
         pets[0].food_level(False)
     result = {
         "Mood": pets[0].mood,
-        "Feed": pets[0].feed, #returneras True eller False beroende på om den äter eller inte
+        "Feed": pets[0].feed,
+        "buildup": joke["buildup"],
+        "punchline": joke["punchline"]
+        #returneras True eller False beroende på om den äter eller inte
         # behöver implementera sleep och pet.
         }
     return jsonify(status = result)
@@ -85,6 +93,9 @@ def home_1():
 
 @app.route('/jokes', methods=['GET','POST'])
 def jokes():
+    build_up = request.form.get("build_up", False)
+    punch_line = request.form.get("punch_line", False)
+    print(build_up, punch_line)
     return render_template('jokes_main.html')
 
 @app.route('/about', methods=['GET','POST'])
@@ -93,7 +104,7 @@ def about():
 
 @app.route('/sign-out', methods=['GET','POST'])
 def sign_out():
-    return render_template('sign_out_main.html')
+    return render_template('sign_in_main.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
