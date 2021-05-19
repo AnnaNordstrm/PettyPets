@@ -7,6 +7,64 @@
 
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+/*
+function gif_chooser(mood, feed = False, sleep = False, pet = False) {
+    if (mood = "dead") {
+        changeToDead(); }
+    else if (feed = true) {
+        changeToEating(); }
+    else if (sleep = true) {
+        changeToSleeping(); }
+    else if (mood = "happy") {
+        changeToHappy();}
+    else if (mood = "angry"); {
+        changeToAngry(); }
+}
+*/
+
+
+//function interaction(type) {
+    interaction = (type) => {
+        var user_action = type;
+        // change level of fullnes by calling for tryFeed in food_level.py. Has now been implemented.
+        
+        console.log(user_action);
+        $.ajax(
+                {
+                    url: "/home_1",
+                    type: "POST",
+                    data: {  
+                        user_action: user_action
+                    }
+                }).done((response) => {
+                var html = "";
+                response = response.status;})
+                //console.log("hej")
+                //$.each(response, (key, val) => {
+                    //html += "<p>" + key + ": " + val + "</p>"
+                
+            //$(".results").append(html);
+
+
+/*    
+function changeToEating() {
+    document.getElementById("pet_image").src = "static/pet_eating.gif";
+    document.getElementById("output_text").innerHTML = "Thanks for feeding me!";
+}
+
+function changeToSleeping() {
+    document.getElementById("pet_image").src = "static/pet_sleeping.jpg";
+    document.getElementById("output_text").innerHTML = "I'm going to sleep. Good night!";
+}
+
+function changeToPet() {
+    document.getElementById("pet_image").src = "static/pet_pet.gif";
+    document.getElementById("output_text").innerHTML = "Thanks for petting me!";
+}
+*/
+</script>
+
 <Title>Petty Pet</Title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href='https://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet'>
@@ -170,6 +228,8 @@ body {
 
 <body>
 
+
+
 <div class="top_menu">
 
     <a class="petty_pet" href="/home">
@@ -233,9 +293,10 @@ body {
 <div class="row2">
 
   <div class="column">
-      <button class="feed_button">
+      <button class="feed_button" onclick="interaction(1)">
           <div class="btn btn-primary tooltip">
-              <input type="image" src="static/feed_button.jpg" onclick="interaction(1)" height="70" width="auto">
+              <input type="image" height="70" width="auto">
+              <img src="static/feed_button.jpg">
               <div class="bottom">
                   <p>Feed the pet</p>
                   <i></i>
@@ -272,62 +333,7 @@ body {
 
 <!--<script src="static/script_main.js"></script>-->
 
-<script>
 
-function gif_chooser(mood, feed = False, sleep = False, pet = False) {
-    if (mood = "dead") {
-        changeToDead(); }
-    else if (feed = True) {
-        changeToEating(); }
-    else if (sleep = True) {
-        changeToSleeping(); }
-    else if (mood = "happy") {
-        changeToHappy();}
-    else if (mood = "angry"); {
-        changeToAngry(); }
-}
-
-function changeToDead() {
-
-}
-
-function interaction(val) {
-        // change level of fullnes by calling for tryFeed in food_level.py. Has now been implemented.
-        var user_action = val
-        prompt("hej")
-        $.ajax(
-            {
-                url: "/home_1",
-                type: "POST",
-                data: {  
-                    user_action: user_action
-                }
-            }).done((response) => {
-            var html = "";
-            response = response.status;})
-            $.each(response, (key, val) => {
-                html += "<p>" + key + ": " + val + "</p>"
-            
-        $(".results").append(html);
-            })
-        })
-    
-function changeToEating() {
-    document.getElementById("pet_image").src = "static/pet_eating.gif";
-    document.getElementById("output_text").innerHTML = "Thanks for feeding me!";
-}
-
-function changeToSleeping() {
-    document.getElementById("pet_image").src = "static/pet_sleeping.jpg";
-    document.getElementById("output_text").innerHTML = "I'm going to sleep. Good night!";
-}
-
-function changeToPet() {
-    document.getElementById("pet_image").src = "static/pet_pet.gif";
-    document.getElementById("output_text").innerHTML = "Thanks for petting me!";
-}
-
-</script>
 
 </body>
 

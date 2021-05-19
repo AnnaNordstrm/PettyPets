@@ -78,7 +78,7 @@ def home_1():
         "Feed": pets[0].feed, #returneras True eller False beroende på om den äter eller inte
         # behöver implementera sleep och pet.
         }
-    return render_template('home_main.html', status=result)
+    return jsonify(status = result)
 
 
 
