@@ -282,8 +282,8 @@ function gif_chooser(mood, feed, sleep, pet, joke) {
         }
     else if (sleep == true) {
         changeToSleeping(); }
-    else if (mood == "happy") {
-        changeToHappy();}
+    // else if (mood == "happy") {
+    //    changeToHappy();}
     //else if (mood == "angry"); {
         //changeToAngry(); }
 
@@ -313,6 +313,10 @@ function interaction(val) {
            // });
             //$(".results").append(html);
             feed = response["Feed"];
+            //
+            food_level = response["Food_level"]
+            document.getElementById("food_level").innerHTML = food_level
+            //
             console.log(feed);
             mood = response["Mood"];
             console.log(mood);
@@ -363,6 +367,7 @@ function changeToNeutral() {
 
 
     <div class="results">
+        <p id="food_level"></p>
     </div>
 </body>
 
