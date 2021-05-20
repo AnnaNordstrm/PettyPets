@@ -216,7 +216,7 @@ body {
 <div class="row1">
 
     <div class="column left">
-        <input id="pet_image" type="image" src="static/pet_neutral.gif" height="250" width="250">
+        <input id="pet_image" type="image" src="static/happy.gif" height="250" width="250">
     </div>
     <div class="column right" id="output_bubble">
         <div class="output_container">
@@ -281,7 +281,7 @@ function gif_chooser(mood, feed, sleep, pet, joke) {
         changeToEating(joke);
         }
     else if (sleep == true) {
-        changeToSleeping(); }
+        changeToSleeping(joke); }
     // else if (mood == "happy") {
     //    changeToHappy();}
     //else if (mood == "angry"); {
@@ -290,7 +290,7 @@ function gif_chooser(mood, feed, sleep, pet, joke) {
 }
 
 function changeToDead() {
-
+    window.setTimeout(interaction, 4000)
 }
 
 function interaction(val) {
@@ -308,10 +308,6 @@ function interaction(val) {
             //var html = "<p> RESULT : </p>";
             response = response.result;
             console.log(response)
-            //$.each(response, (key, val) => {
-               // html += "<p>" + key + ": " + val + "</p>";
-           // });
-            //$(".results").append(html);
             feed = response["Feed"];
             //
             food_level = response["Food_level"]
@@ -331,28 +327,56 @@ function interaction(val) {
     };
 
     function changeToEating(joke) {
-    document.getElementById("pet_image").src = "static/pet_eating.gif";
     
-    // now tell joke
+    // let the lemur eat and let it say thank you.
+    document.getElementById("pet_image").src = "static/eating.gif";
+    document.getElementById("output_text").innerHTML = "Nom nom nom!" ;
+    window.setTimeout(function() {document.getElementById("output_text").innerHTML = "Thank you for feeding me! Here's a little joke for you...";}, 4000);
+
+    //prepare joke
     var buildup = joke[0];
     var punchline = joke[1];
     
-    window.setTimeout(function() {document.getElementById("pet_image").src = "static/happy.gif"}, 4000);
-    window.setTimeout(function() {document.getElementById("output_text").innerHTML = buildup;}, 4000);
-    
+    window.setTimeout(function() {document.getElementById("pet_image").src = "static/happy.gif"}, 8000);
+    // first, tell buildup
+    window.setTimeout(function() {document.getElementById("output_text").innerHTML = buildup;}, 8000);
+    // then, tell punchline after 4000 milliseconds.
     var full_joke = buildup.concat("<br><br>", punchline);
-    window.setTimeout(function() {document.getElementById("output_text").innerHTML = full_joke}, 8000);
-    
-    normal_text = "Hello! <br><br> My name is Kung Julian. <br><br>You can click on the buttons to take care of me." // LINE BREAK DOESNT WORK
-    window.setTimeout(function() {document.getElementById("output_text").innerHTML = normal_text}, 12000);
+    window.setTimeout(function() {document.getElementById("output_text").innerHTML = full_joke}, 12000);
+    // go back to ordinary text after 4000 milliseconds.
+    normal_text = "Hello! <br><br> My name is Kung Julian. <br><br>You can click on the buttons to take care of me."
+    window.setTimeout(function() {document.getElementById("output_text").innerHTML = normal_text}, 16000);
 
 
 }
 
-function changeToSleeping() {
+
+
+function changeToSleeping(joke) {
     document.getElementById("pet_image").src = "static/pet_sleeping.jpg";
     document.getElementById("output_text").innerHTML = "I'm going to sleep. Good night!";
+    window.setTimeout(function() {document.getElementById("output_text").innerHTML = "Zzz...";}, 4000);
+
+    window.setTimeout(function() {document.getElementById("pet_image").src = "static/happy.gif"}, 16000);    
+    window.setTimeout(function() {document.getElementById("output_text").innerHTML = "*yawn* Good morning..! I came up with a joke in my dreams while I slept... I hope you'll like it."}, 16000);
+
+    //prepare joke
+    var buildup = joke[0];
+    var punchline = joke[1];
+
+    console.log(buildup)
+
+    // first, tell buildup
+    window.setTimeout(function() {document.getElementById("output_text").innerHTML = buildup;}, 20000);
+    // then, tell punchline after 4000 milliseconds.
+    var full_joke = buildup.concat("<br><br>", punchline);
+    window.setTimeout(function() {document.getElementById("output_text").innerHTML = full_joke}, 24000);
+    // go back to ordinary text after 4000 milliseconds.
+    normal_text = "Hello! <br><br> My name is Kung Julian. <br><br>You can click on the buttons to take care of me."
+    window.setTimeout(function() {document.getElementById("output_text").innerHTML = normal_text}, 28000);
 }
+
+
 
 function changeToPet() {
     document.getElementById("pet_image").src = "static/pet_pet.gif";
