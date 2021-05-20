@@ -1,3 +1,102 @@
+import time
+from datetime import datetime
+import json
+from random import randint
+
+class Pet:
+   #  Class for the pet
+   def __init__(self):
+      self.name = "Lemmy"
+      self.sleepLevel = 20
+      self.sleep = False
+      self.lastSlept = current_time()
+      self.timeOfBirth = current_time()
+      self.foodLevel = 30
+      self.lastFed = current_time()
+      self.mood = "angry"
+      self.feed = False
+
+
+   def food_level(self, tryFeed):
+    """
+    Purpose: To make the object hungrier with time, and if right conditions: feeds the pet +30
+    Parameters:
+    tryFeed: Boolean, takes in whether user tries to feed the pet.
+    Returns: an updated self, mood and feed
+    """
+    deltatime = delta_time(self.lastFed)[0]
+    self.foodLevel = self.foodLevel - (0.05 * deltatime)
+
+    if self.foodLevel >= 70 and tryFeed:
+        self.feed = False
+        self.mood = 'happy'
+    elif self.foodLevel > 0 and tryFeed:
+        self.foodLevel += 30
+        self.feed = True
+        self.mood = 'happy'
+    elif self.foodLevel < 30 and self.foodLevel > 0:
+        self.mood = 'angry'
+    elif self.foodLevel <= 0:
+        self.mood = 'dead'
+
+    def pet_level(self):
+        pass
+
+   """
+   ALLT DET HÄR ÄR EN GAMMAL VERSION AV SLEEP_LEVEL. PROBLEMET MED DEN VAR ATT GIFARNA INTE HADE SPELATS UPP PGA DENNA FUNKTION.
+   DÄRFÖR ANVÄNDS EN BETYDLIGT ENKLARE SLEEP_LEVEL JUST NEDANFÖR.
+
+   def sleep_level(self, trySleep):
+      deltatime = delta_time(self.lastFed)[0]
+      self.sleep = False
+
+      self.sleepLevel = self.sleepLevel - (0.035 * int(deltatime))
+      if trySleep:
+         if self.sleepLevel < 50:
+            print(self.sleepLevel, ", less than 50")
+            self.sleep = True
+         else:
+            self.sleep = False
+      if self.sleepLevel < 0:
+
+         self.sleep = True
+
+      if self.sleep:
+         while self.sleepLevel < 100:
+            #self.sleepLevel = self.sleepLevel + 0.24 * int(deltatime)
+            self.sleepLevel = 100 #just nu maxas sleepLevel direkt då den får sova. Ska ändras?
+            self.sleep = False     
+      print(self.sleepLevel,", at the end of the function")
+      #return sleepLevel, sleep
+   """
+
+   def sleep_level(self, trySleep):
+      deltatime = delta_time(self.lastFed)[0]
+      self.sleep = False
+
+      self.sleepLevel = self.sleepLevel - (0.035 * int(deltatime))
+      
+      if trySleep:
+         if self.sleepLevel < 50:
+            self.sleep = True
+            self.sleepLevel = 100
+         else:
+            self.sleep = False
+      if self.sleepLevel < 0:
+         self.sleep = True
+
+      """
+      if self.sleep:
+         while self.sleepLevel < 100:
+            #self.sleepLevel = self.sleepLevel + 0.24 * int(deltatime)
+            self.sleepLevel = 100 #just nu maxas sleepLevel direkt då den får sova. Ska ändras?
+            self.sleep = False     
+      print(self.sleepLevel,", at the end of the function")
+      #return sleepLevel, sleep
+      """
+
+
+
 def joke_provider():
    """
    Purpose: Pick a joke from punchline.dat and buildup.dat.
@@ -62,7 +161,8 @@ def current_time():
     return time
 
 
-
+pet = [Pet()]
+pet[0].sleep_level(True)
 
 
 
