@@ -247,7 +247,7 @@ body {
   <div class="column">
       <button class="sleep_button">
           <div class="btn btn-primary tooltip">
-          <input id="sleep_button" type="image" src="static/sleep_button.jpg" onclick="changeToSleeping()" height="70" width="auto">
+          <input id="sleep_button" type="image" src="static/sleep_button.jpg" onclick="interaction(2)" height="70" width="auto">
               <div class="bottom">
                   <p>Put to sleep</p>
                   <i></i>
@@ -281,7 +281,8 @@ function gif_chooser(mood, feed, sleep, pet, joke) {
         changeToEating(joke);
         }
     else if (sleep == true) {
-        changeToSleeping(joke); }
+        changeToSleeping(joke);
+        console.log("changetosleeping blir kallad!") }
     // else if (mood == "happy") {
     //    changeToHappy();}
     //else if (mood == "angry"); {
@@ -311,16 +312,20 @@ function interaction(val) {
             feed = response["Feed"];
             //
             food_level = response["Food_level"]
-            document.getElementById("food_level").innerHTML = food_level
+            document.getElementById("food_level").innerHTML = "Food level:", food_level
             //
             console.log(feed);
+            //
+            sleep = response["Sleep"]
+
+            //
             mood = response["Mood"];
             console.log(mood);
             joke = response["Joke"];
             //buildup = response["buildup"]
             //punchline = response["punchline"]
             // joke = buildup + "\n" + punchline
-            sleep = false;
+            //sleep = false;
             pet = false;
             gif_chooser(mood,feed, sleep, pet, joke)
         });
