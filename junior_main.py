@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, jsonify
-from middleware_main import joke_provider, delta_time, current_time
+from middleware_main import joke_provider, delta_time, current_time, Pet
 import time
 from datetime import datetime
 import json
@@ -8,46 +8,6 @@ from random import randint
 from joke_provider import jokeProvider
 
 app = Flask(__name__)
-
-class Pet:
-   #  Class for the pet
-   def __init__(self):
-      self.name = "Lemmy"
-      self.timeOfBirth = current_time()
-      self.foodLevel = 30
-      self.lastFed = current_time()
-      self.mood = "angry"
-      self.feed = False
-
-
-   def food_level(self, tryFeed):
-    """
-    Purpose: To make the object hungrier with time, and if right conditions: feeds the pet +30
-    Parameters:
-    tryFeed: Boolean, takes in whether user tries to feed the pet.
-    Returns: an updated self, mood and feed
-    """
-    deltatime = delta_time(self.lastFed)[0]
-    self.foodLevel = self.foodLevel - (0.05 * deltatime)
-
-    if self.foodLevel >= 70 and tryFeed:
-        self.feed = False
-        self.mood = 'happy'
-    elif self.foodLevel > 0 and tryFeed:
-        self.foodLevel += 30
-        self.feed = True
-        self.mood = 'happy'
-    elif self.foodLevel < 30 and self.foodLevel > 0:
-        self.mood = 'angry'
-    elif self.foodLevel <= 0:
-        self.mood = 'dead'
-
-    def pet_level(self):
-        pass
-
-    def sleep_level(self):
-        pass
-
 
 
 pets = [Pet()]
@@ -75,21 +35,29 @@ def home():
 def home_1():
     button_check = request.form['user_action'] #kontrollerar om användare tryckt på knapp och kollar i så fall vilken
     joke = jokeProvider()
-    if int(button_check) == 1:
+
+    if int(button_check) == 1:              # mat-knappen 
         pets[0].food_level(True)
+    elif int(button_check) == 2:            # sova-knappen
+        pets[0].sleep_level(True)
     else:
-        pets[0].food_level(False)
+        pets[0].food_level(False)           # Ingen knapp
+    
     result = {
         "Mood": pets[0].mood,
         "Feed": pets[0].feed,
         "Joke": joke,
-        "Food_level": pets[0].foodLevel
+        "Food_level": pets[0].foodLevel,
+        "Sleep_level": pets[0].sleepLevel,
+        "Sleep": pets[0].sleep
         #
         #"buildup": joke["buildup"],
         #"punchline": joke["punchline"]
         #returneras True eller False beroende på om den äter eller inte
         # behöver implementera sleep och pet.
         }
+    pets[0].lastFed = current_time()
+    pets[0].lastSlept = current_time()
     return jsonify(result=result)
 
 
