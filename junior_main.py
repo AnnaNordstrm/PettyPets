@@ -70,7 +70,8 @@ def home_1():
 def jokes():
     build_up = request.form.get("build_up", False)
     punch_line = request.form.get("punch_line", False)
-    print(build_up, punch_line)
+    if punch_line != False:
+        jokestorer(build_up,punch_line)
     return render_template('jokes_main.html')
 
 @app.route('/about', methods=['GET','POST'])
