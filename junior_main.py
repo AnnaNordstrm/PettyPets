@@ -4,8 +4,8 @@ import time
 from datetime import datetime
 import json
 from random import randint
-# from joker import joker
-from joke_provider import jokeProvider
+
+
 
 app = Flask(__name__)
 
