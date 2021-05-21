@@ -36,6 +36,9 @@ def home_1():
     button_check = request.form['user_action'] #kontrollerar om användare tryckt på knapp och kollar i så fall vilken
     joke = jokeProvider()
 
+    pets[0].feed = False                    # Nollställer feed så att den inte alltid förblir True. Annars kan djuret inte sova
+    pets[0].sleep =  False
+    
     if int(button_check) == 1:              # mat-knappen 
         pets[0].food_level(True)
     elif int(button_check) == 2:            # sova-knappen
