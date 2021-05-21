@@ -1,10 +1,10 @@
 from flask import Flask, request, render_template, jsonify
-from middleware_main import joke_provider, delta_time, current_time, Pet
+from middleware_main import joke_provider, jokestorer, delta_time, current_time, Pet
 import time
 from datetime import datetime
 import json
 from random import randint
-
+# from joker import joker
 
 
 app = Flask(__name__)
@@ -34,11 +34,11 @@ def home():
 # ska kallas från javascript
 def home_1():
     button_check = request.form['user_action'] #kontrollerar om användare tryckt på knapp och kollar i så fall vilken
-    joke = jokeProvider()
+    joke = joke_provider()
 
     pets[0].feed = False                    # Nollställer feed så att den inte alltid förblir True. Annars kan djuret inte sova
     pets[0].sleep =  False
-    
+
     if int(button_check) == 1:              # mat-knappen 
         pets[0].food_level(True)
     elif int(button_check) == 2:            # sova-knappen
