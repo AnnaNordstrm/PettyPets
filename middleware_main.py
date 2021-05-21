@@ -79,7 +79,7 @@ class Pet:
       if trySleep:
          if self.sleepLevel < 50:
             self.sleep = True
-            self.sleepLevel = 100
+            self.sleepLevel = 10
          else:
             self.sleep = False
       if self.sleepLevel < 0:
@@ -96,13 +96,13 @@ class Pet:
       """
 
 
-
+"""
 def joke_provider():
-   """
+
    Purpose: Pick a joke from punchline.dat and buildup.dat.
    Returns: A list consisting of two strings, in which
    the first item is the buildup, the second is the punchline.
-   """
+
 
    # first, pick out a random buildup:
    with open('buildup.dat') as buildups:
@@ -122,6 +122,32 @@ def joke_provider():
    return [buildup, punchline]
 
 # print(joke_provider())
+"""
+def joke_provider():
+    """
+    Purpose: Pick a joke from punchline.dat and buildup.dat.
+    Returns: A list consisting of two strings, in which
+    the first item is the buildup, the second is the punchline.
+    """
+
+    with open('buildup2.txt') as buildups:
+        lines = buildups.readlines()
+        list=[]
+        for i in lines:
+            list.append(i)
+
+    with open('punchline2.txt') as punchline:
+        lines = punchline.readlines()
+        list1 = []
+        for i in lines:
+            list1.append(i)
+
+    place = int(randint(0, len(list)-1))
+    buildup = list[place]
+    punchline = list1[place]
+
+    return [buildup, punchline]
+
 
 def delta_time (last_update):
    # Takes the last feeding time, time now and returns the difference in minutes
@@ -160,11 +186,19 @@ def current_time():
 
     return time
 
+def jokestorer(build_up, punchline):
+
+   with open('buildup2.txt','a') as buildups:
+      buildups.write("\n" + build_up)
+
+
+
+   with open('punchline2.txt', 'a') as punchlines:
+      punchlines.write("\n" + punchline)
+
+
 
 pet = [Pet()]
 pet[0].sleep_level(True)
-
-
-
 
 
