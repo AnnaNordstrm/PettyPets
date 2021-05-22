@@ -259,7 +259,7 @@ body {
   <div class="column">
       <button class="pet_button">
           <div class="btn btn-primary tooltip">
-          <input id="pet_button" type="image" src="static/pet_button.jpg" onclick="changeToPet()" height="70" width="auto">
+          <input id="pet_button" type="image" src="static/pet_button.jpg" onclick="interaction(3)" height="70" width="auto">
               <div class="bottom">
                   <p>Pet the pet</p>
                   <i></i>
@@ -283,6 +283,9 @@ function gif_chooser(mood, feed, sleep, pet, joke) {
     else if (sleep == true) {
         changeToSleeping(joke);
         console.log("changetosleeping blir kallad!") }
+    else if (pet == true) {
+        changeToPet(joke);
+        }
     // else if (mood == "happy") {
     //    changeToHappy();}
     //else if (mood == "angry"); {
@@ -317,7 +320,7 @@ function interaction(val) {
             console.log(feed);
             //
             sleep = response["Sleep"]
-
+            pet = response["pet"];
             //
             mood = response["Mood"];
             console.log(mood);
@@ -326,7 +329,7 @@ function interaction(val) {
             //punchline = response["punchline"]
             // joke = buildup + "\n" + punchline
             //sleep = false;
-            pet = false;
+            //pet = false;
             gif_chooser(mood,feed, sleep, pet, joke)
         });
     };
@@ -383,7 +386,7 @@ function changeToSleeping(joke) {
 
 
 
-function changeToPet() {
+function changeToPet(joke) {
     document.getElementById("pet_image").src = "static/pet_pet.gif";
     document.getElementById("output_text").innerHTML = "Thanks for petting me!";
 }

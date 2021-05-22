@@ -37,12 +37,16 @@ def home_1():
     joke = joke_provider()
 
     pets[0].feed = False                    # Nollställer feed så att den inte alltid förblir True. Annars kan djuret inte sova
-    pets[0].sleep =  False
+    pets[0].sleep = False
+    pets[0].petted = False
 
     if int(button_check) == 1:              # mat-knappen 
         pets[0].food_level(True)
+        print(pets[0].foodLevel)
     elif int(button_check) == 2:            # sova-knappen
         pets[0].sleep_level(True)
+    elif int(button_check) == 3:            # sova-knappen
+        pets[0].pet_level(True)
     else:
         pets[0].food_level(False)           # Ingen knapp
     
@@ -52,7 +56,8 @@ def home_1():
         "Joke": joke,
         "Food_level": pets[0].foodLevel,
         "Sleep_level": pets[0].sleepLevel,
-        "Sleep": pets[0].sleep
+        "Sleep": pets[0].sleep,
+        "pet": pets[0].petted
         #
         #"buildup": joke["buildup"],
         #"punchline": joke["punchline"]
@@ -72,7 +77,7 @@ def jokes():
     punch_line = request.form.get("punch_line", False)
     if punch_line != False:
         jokestorer(build_up,punch_line)
-    return render_template('jokes_main.html')
+    return render_template('jokes_main.html', name=pets[0].name)
 
 @app.route('/about', methods=['GET','POST'])
 def about():
