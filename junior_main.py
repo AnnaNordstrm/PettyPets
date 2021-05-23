@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, jsonify
-from middleware_main import joke_provider, jokestorer, delta_time, current_time, Pet
+from middleware_main import joke_provider, jokestorer, delta_time, current_time, Pet, user_store, user_load
 import time
 from datetime import datetime
 import json
@@ -13,22 +13,33 @@ app = Flask(__name__)
 pets = [Pet()]
 
 @app.route('/', methods=['GET','POST'])
-def sign_in():
-    return render_template('sign_in_main.html')
-
-@app.route('/sign-up', methods=['GET','POST'])
 def sign_up():
     return render_template('sign_up_main.html')
 
 @app.route('/namer', methods=['GET','POST'])
 def namer():
-    pets[0].name = (request.form.get("key"))
-    return render_template('home_main.html', name=pets[0].name)
+    pets[0].pet_name = (request.form.get("pet_name"))
+    pets[0].username = (request.form.get("username"))
+    pets[0].password = (request.form.get("password"))
+    user_store(pets[0].pet_name)
+    return render_template('home_main.html', pet_name=pets[0].pet_name, username=pets[0].username)
+
+@app.route('/sign-in', methods=['GET','POST'])
+def sign_in():
+    pets[0].username = (request.form.get("username"))
+    pets[0].password = (request.form.get("password"))
+    return render_template('sign_in_main.html')
+
+@app.route('/login', methods=['GET','POST'])
+def login():
+    user_load()
+    pets[0].username = (request.form.get("username"))
+    pets[0].password = (request.form.get("password"))
+    return render_template('home_main.html',pet_name=pets[0].pet_name, username=pets[0].username)
 
 @app.route('/home', methods=['GET','POST'])
 def home():
-    return render_template('home_main.html', name=pets[0].name)   #/home splittras till 2 routs, eftersom att vi inte vill att koden i /home_1 körs varje gång
-
+    return render_template('home_main.html', pet_name=pets[0].pet_name, username=pets[0].username)   #/home splittras till 2 routs, eftersom att vi inte vill att koden i /home_1 körs varje gång
 
 @app.route('/home_1', methods=['GET','POST'])
 # ska kallas från javascript
@@ -74,24 +85,21 @@ def home_1():
     pets[0].lastPet = current_time()
     return jsonify(result=result)
 
-
-
-
 @app.route('/jokes', methods=['GET','POST'])
 def jokes():
     build_up = request.form.get("build_up", False)
     punch_line = request.form.get("punch_line", False)
     if punch_line != False:
         jokestorer(build_up,punch_line)
-    return render_template('jokes_main.html', name=pets[0].name)
+    return render_template('jokes_main.html', pet_name=pets[0].pet_name, username=pets[0].username)
 
 @app.route('/about', methods=['GET','POST'])
 def about():
-    return render_template('about_main.html')
+    return render_template('about_main.html', username=pets[0].username)
 
 @app.route('/sign-out', methods=['GET','POST'])
 def sign_out():
-    return render_template('sign_in_main.html')
+    return render_template('sign_out_main.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
