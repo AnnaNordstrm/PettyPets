@@ -1,6 +1,3 @@
-<!-- HTML is used to define the content on the web page-->
-<!-- JavaScript is used to program the behavior of the web page-->
-
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
@@ -8,69 +5,8 @@
 <Title>Petty Pet</Title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href='https://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet'>
-<style>
+<link rel="stylesheet" href="static/stylesheet_about.css">
 
-body {
-  background-color: rgb(163,215,168);
-  font-family: 'Aldrich';
-  margin: 0;
-}
-
-.top_menu {
-  width: 100%;
-  background-color: white;
-  overflow: auto;
-}
-
-.top_menu a {
-  float: left;
-  width: 20%;
-  text-align: center;
-  padding: 2px 0;
-  transition: all 0.3s ease;
-  color: white;
-  height: 50px;
-}
-
-.top_menu a:hover {
-  background-color: white;
-}
-
-.active {
-  background-color: grey;
-}
-
-.row1 {
-  text-align: center;
-  display: block;
-  margin-top: 50px;
-}
-
-.column {
-  padding: 5px;
-}
-
-.left {
-  text-align: center;
-}
-
-.right {
-  width: 10%;
-}
-
-.row2 {
-  text-align: center;
-  display: block;
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
-
-.column {
-  display: inline-block;
-  padding: 20px;
-}
-
-</style>
 </head>
 
 <body>
@@ -82,7 +18,7 @@ body {
             <img src="static/petty_pet_logo.jpg" width="200" height="50">
         </div>
     </a>
-    <a class="active" href="/home">
+    <a class="home" href="/home">
         <div class="home_icon">
             <img src="static/home_icon.jpg">
         </div>
@@ -92,7 +28,7 @@ body {
             <img src="static/jokes_icon.jpg">
         </div>
     </a>
-    <a class="about" href="/about">
+    <a class="active" href="/about">
         <div class="about_icon">
             <img src="static/about_icon.jpg">
         </div>
@@ -105,19 +41,23 @@ body {
 
 </div>
 
-<h1 style="text-align:center; line-height: 1.5; margin-top: 50px">About Petty Pet</h1>
+<p style="text-align:right; font-size:15px; margin-right:20px;">Signed in as: "{{username}}"<p>
+
+<br>
+  
+<p style="text-align:center; font-size: 50px">About Petty Pet</p>
 
 <p style="text-align:center; line-height: 1.5; padding: 2em 15em">
     We are making a digital pet that users check in on and take care of in order to keep it happy.
     The pet will be available from a website.
     The interactions that the user can do with the pet is feed the pet, pet the pet,
-    make it sleep and possibly other interactions.
-    When the user interacts with the pet, the pet will reward the user’s kindness with a joke or a random fact.
+    make it sleep.
+    When the user interacts with the pet, the pet will reward the user’s kindness with a joke.
     If the user mistreats their pet then its mood will be too cranky for jokes.
-    Users will be able to contribute with jokes and facts themselves.
+    Users will be able to contribute with jokes themselves.
     The input of the users will be stored in a collective “joke bank”,
     which makes one's pet tell jokes that other users have contributed.
-    When the pet tells a joke or a fact, the user can rate it. The goal is to keep the pet alive.
+    The goal is to keep the pet alive.
     If a pet is not taken care of, it will die. When it’s born anew,
     it will have lost all its previous knowledge.</p>
 
