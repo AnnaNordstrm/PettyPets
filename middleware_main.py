@@ -159,4 +159,16 @@ def jokestorer(build_up, punchline):
 pet = [Pet()]
 pet[0].sleep_level(True)
 
+def user_store(pet_name):
+    with open('user_info.txt', 'r+') as user_info:
+        data = user_info.read()
+        user_info.seek(0)
+        user_info.write(pet_name + "\n")
+        user_info.truncate()
+
+def user_load():
+    with open('user_info.txt') as user_info:
+        pet_name = user_info.readlines()
+        return (pet_name)
+
 
