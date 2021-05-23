@@ -41,8 +41,6 @@ class Pet:
         elif self.foodLevel <= 0:
             self.mood = 'dead'
 
-        def pet_level(self):
-            pass
 
     def sleep_level(self, trySleep):
         deltatime = delta_time(self.lastFed)[0]
