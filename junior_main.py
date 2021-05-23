@@ -42,14 +42,18 @@ def home_1():
 
     if int(button_check) == 1:              # mat-knappen 
         pets[0].food_level(True)
+        #pets[0].sleep_level(False)         #borde man kankse se till så att alla levels uppdateras oavsett.
+        #pets[0].pet_level(False)
         print(pets[0].foodLevel)
     elif int(button_check) == 2:            # sova-knappen
         pets[0].sleep_level(True)
     elif int(button_check) == 3:            # sova-knappen
         pets[0].pet_level(True)
     else:
-        pets[0].food_level(False)           # Ingen knapp
-    
+        pets[0].food_level(False)           # Ingen knapp: uppdaterar alla statusar utan att interagera med dem
+        pets[0].pet_level(False)
+        pets[0].sleep_level(False)
+
     result = {
         "Mood": pets[0].mood,
         "Feed": pets[0].feed,
@@ -57,7 +61,8 @@ def home_1():
         "Food_level": pets[0].foodLevel,
         "Sleep_level": pets[0].sleepLevel,
         "Sleep": pets[0].sleep,
-        "pet": pets[0].petted
+        "pet": pets[0].petted,
+        "button": button_check
         #
         #"buildup": joke["buildup"],
         #"punchline": joke["punchline"]
@@ -66,6 +71,7 @@ def home_1():
         }
     pets[0].lastFed = current_time()
     pets[0].lastSlept = current_time()
+    pets[0].lastPet = current_time()
     return jsonify(result=result)
 
 
