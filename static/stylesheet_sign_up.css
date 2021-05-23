@@ -1,0 +1,98 @@
+body{
+   font-family: 'Aldrich';
+}
+* {box-sizing: border-box}
+
+/* Split the screen in half */
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+/* Control the left side */
+.left {
+  left: 0;
+  width: 40%;
+  background-color: rgb(206,243,192,255);
+}
+
+/* Control the right side */
+.right {
+  right: 0;
+  width: 60%;
+  font-family: 'Aldrich';
+  background-color: white;
+}
+
+/* If you want the content centered horizontally and vertically */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+  font-family: 'Aldrich'
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for all buttons */
+button {
+  padding: 14px 20px;
+  margin: auto;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+  font-family: 'Aldrich'
+}
+
+button:hover {
+  opacity:1;
+}
+
+.sign_in_button {
+  width: 20%;
+  background-color: rgb(76,83,84);
+  text-align: center;
+  display: block;
+  color: white;
+}
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.sign_up_button {
+  background-color: rgb(206,243,192,255);
+  width: 20%;
+  color: black;
+  text-align: center;
+  display: block;
+}

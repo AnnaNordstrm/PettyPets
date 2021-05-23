@@ -1,0 +1,59 @@
+body {
+  background-color: rgb(206,243,192,255);
+  font-family: 'Aldrich';
+  margin: 0;
+}
+
+.top_menu {
+  width: 100%;
+  background-color: white;
+  overflow: auto;
+}
+
+.top_menu a {
+  float: left;
+  width: 20%;
+  text-align: center;
+  padding: 2px 0;
+  transition: all 0.3s ease;
+  color: white;
+  height: 50px;
+}
+
+.top_menu a:hover {
+  background-color: white;
+}
+
+.active {
+  background-color: grey;
+}
+
+.row1 {
+  text-align: center;
+  display: block;
+  margin-top: 50px;
+}
+
+.column {
+  padding: 5px;
+}
+
+.left {
+  text-align: center;
+}
+
+.right {
+  width: 10%;
+}
+
+.row2 {
+  text-align: center;
+  display: block;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.column {
+  display: inline-block;
+  padding: 20px;
+}
