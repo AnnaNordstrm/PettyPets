@@ -17,7 +17,7 @@ class Pet:
         self.mood = "angry"
         self.feed = False
         self.petted = False
-
+        self.lastPet = current_time()         #Används denna?
 
     def food_level(self, tryFeed):
         """
@@ -44,34 +44,6 @@ class Pet:
         def pet_level(self):
             pass
 
-    """
-    ALLT DET HÄR ÄR EN GAMMAL VERSION AV SLEEP_LEVEL. PROBLEMET MED DEN VAR ATT GIFARNA INTE HADE SPELATS UPP PGA DENNA FUNKTION.
-    DÄRFÖR ANVÄNDS EN BETYDLIGT ENKLARE SLEEP_LEVEL JUST NEDANFÖR.
- 
-    def sleep_level(self, trySleep):
-       deltatime = delta_time(self.lastFed)[0]
-       self.sleep = False
- 
-       self.sleepLevel = self.sleepLevel - (0.035 * int(deltatime))
-       if trySleep:
-          if self.sleepLevel < 50:
-             print(self.sleepLevel, ", less than 50")
-             self.sleep = True
-          else:
-             self.sleep = False
-       if self.sleepLevel < 0:
- 
-          self.sleep = True
- 
-       if self.sleep:
-          while self.sleepLevel < 100:
-             #self.sleepLevel = self.sleepLevel + 0.24 * int(deltatime)
-             self.sleepLevel = 100 #just nu maxas sleepLevel direkt då den får sova. Ska ändras?
-             self.sleep = False     
-       print(self.sleepLevel,", at the end of the function")
-       #return sleepLevel, sleep
-    """
-
     def sleep_level(self, trySleep):
         deltatime = delta_time(self.lastFed)[0]
         self.sleep = False
@@ -81,7 +53,7 @@ class Pet:
         if trySleep:
             if self.sleepLevel < 50:
                 self.sleep = True
-                self.sleepLevel = 10
+                self.sleepLevel = 100
             else:
                 self.sleep = False
         if self.sleepLevel < 0:
@@ -111,33 +83,8 @@ class Pet:
             self.mood = 'happy'
         elif round(self.petLevel) < 1:
             self.mood = 'angry'
-"""
-def joke_provider():
-
-   Purpose: Pick a joke from punchline.dat and buildup.dat.
-   Returns: A list consisting of two strings, in which
-   the first item is the buildup, the second is the punchline.
 
 
-   # first, pick out a random buildup:
-   with open('buildup.dat') as buildups:
-      buildup_data = buildups.read()
-
-   buildup_js = json.loads(buildup_data)  # this creates a dictionary of what is read in the dat-file.
-   randNr = str(randint(1, len(buildup_js)))
-   buildup = buildup_js[randNr]  # picks out a random joke from the dictionary.
-
-   # pick up the corresponding punchline:
-   with open('punchline.dat') as punchlines:
-      punchline_data = punchlines.read()
-
-   punchline_js = json.loads(punchline_data)
-   punchline = punchline_js[randNr]
-
-   return [buildup, punchline]
-
-# print(joke_provider())
-"""
 def joke_provider():
     """
     Purpose: Pick a joke from punchline.dat and buildup.dat.
