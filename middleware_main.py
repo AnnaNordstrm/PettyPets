@@ -28,35 +28,35 @@ class Pet:
         """
         deltatime = delta_time(self.lastFed)[0]
         self.foodLevel = self.foodLevel - (0.05 * deltatime)
-
-        if self.foodLevel >= 70 and tryFeed:
-            self.feed = False
-            self.mood = 'happy'
-        elif self.foodLevel > 0 and tryFeed:
-            self.foodLevel += 30
-            self.feed = True
-            self.mood = 'happy'
-        elif self.foodLevel < 30 and self.foodLevel > 0:
-            self.mood = 'angry'
-        elif self.foodLevel <= 0:
-            self.mood = 'dead'
-        print(self.foodLevel)
+        if not self.mood == "dead":
+            if self.foodLevel >= 70 and tryFeed:
+                self.feed = False
+                self.mood = 'happy'
+            elif self.foodLevel > 0 and tryFeed:
+                self.foodLevel += 30
+                self.feed = True
+                self.mood = 'happy'
+            elif self.foodLevel < 30 and self.foodLevel > 0:
+                self.mood = 'angry'
+            elif self.foodLevel <= 0:
+                self.mood = 'dead'
 
 
     def sleep_level(self, trySleep):
-        deltatime = delta_time(self.lastFed)[0]
-        self.sleep = False
+        if not self.mood == "dead": 
+            deltatime = delta_time(self.lastFed)[0]
+            self.sleep = False
 
-        self.sleepLevel = self.sleepLevel - (0.035 * int(deltatime))
+            self.sleepLevel = self.sleepLevel - (0.035 * int(deltatime))
 
-        if trySleep:
-            if self.sleepLevel < 50:
-                self.sleep = True
-                self.sleepLevel = 100
-            else:
-                self.sleep = False
-        if self.sleepLevel < 0:
-            self.sleep = True
+            if trySleep:
+                if self.sleepLevel < 70:
+                    self.sleep = True
+                    self.sleepLevel = 50
+                else:
+                    self.sleep = False
+            if self.sleepLevel < 0:
+                self.mood = "dead"
 
         """
         if self.sleep:
@@ -70,17 +70,17 @@ class Pet:
 
     def pet_level(self, tryPet):
         if self.petLevel < 0:
-            self.petLevel = 0
+            self.mood = "dead"
         deltatime = delta_time(self.lastFed)[0]
-        self.petLevel = self.petLevel - (0.08333 * deltatime)
-        if round(self.petLevel) == 10 and tryPet:
+        self.petLevel = self.petLevel - (0.05 * deltatime)
+        if round(self.petLevel) == 100 and tryPet:
             self.petted = False
             self.mood = 'happy'
-        elif tryPet:
+        elif tryPet and not self.mood == "dead":
             self.petLevel += 1
             self.petted = True
             self.mood = 'happy'
-        elif round(self.petLevel) < 1:
+        if round(self.petLevel) < 3 and not self.mood == "dead":
             self.mood = 'angry'
 
 
@@ -156,9 +156,9 @@ def jokestorer(build_up, punchline):
       punchlines.write("\n" + punchline)
 
 
-
+#username = obj
 pet = [Pet()]
-pet[0].sleep_level(True)
+#pet[0].sleep_level(True)
 
 def user_store(pet_name):
     with open('user_info.txt', 'r+') as user_info:
