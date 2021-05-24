@@ -53,13 +53,17 @@ def home_1():
 
     if int(button_check) == 1:              # mat-knappen 
         pets[0].food_level(True)
-        #pets[0].sleep_level(False)         #borde man kankse se till så att alla levels uppdateras oavsett.
-        #pets[0].pet_level(False)
+        pets[0].sleep_level(False)         #borde man kankse se till så att alla levels uppdateras oavsett.
+        pets[0].pet_level(False)
         print(pets[0].foodLevel)
     elif int(button_check) == 2:            # sova-knappen
         pets[0].sleep_level(True)
+        pets[0].food_level(False)
+        pets[0].pet_level(False)
     elif int(button_check) == 3:            # sova-knappen
         pets[0].pet_level(True)
+        pets[0].food_level(False)
+        pets[0].sleep_level(False)
     else:
         pets[0].food_level(False)           # Ingen knapp: uppdaterar alla statusar utan att interagera med dem
         pets[0].pet_level(False)
