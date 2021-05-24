@@ -4,7 +4,7 @@ import time
 from datetime import datetime
 import json
 from random import randint
-# from joker import joker
+
 
 
 app = Flask(__name__)
@@ -64,6 +64,7 @@ def home_1():
         pets[0].food_level(False)           # Ingen knapp: uppdaterar alla statusar utan att interagera med dem
         pets[0].pet_level(False)
         pets[0].sleep_level(False)
+
 
     result = {
         "Mood": pets[0].mood,

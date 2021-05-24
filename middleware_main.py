@@ -40,6 +40,7 @@ class Pet:
             self.mood = 'angry'
         elif self.foodLevel <= 0:
             self.mood = 'dead'
+        print(self.foodLevel)
 
 
     def sleep_level(self, trySleep):

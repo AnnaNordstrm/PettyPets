@@ -3,7 +3,9 @@
 <meta charset="UTF-8">
 
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+
+</script>
 <Title>Petty Pet</Title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href='https://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet'>
@@ -11,7 +13,7 @@
 
 </head>
 
-<body>
+<body onload="updateClock; setInterval(updateClock(), 1000 )">
 
 <div class="top_menu">
 
@@ -106,6 +108,13 @@
 
 <script>
 
+
+function updateClock() {
+    interaction(0)
+    console.log("uppdaterar")
+    setTimeout(updateClock, 10000)
+    }
+
 function changeToDead() {
     document.getElementById("pet_image").src = "static/tombstone.png";     
     document.getElementById("output_text").innerHTML = "Thanks. I'm dead now.";
@@ -146,7 +155,8 @@ function interaction(val) {
         });
     };
 
-setTimeout(interaction(0),10000)
+
+
 function gif_chooser(mood, feed, sleep, pet, joke, food_level, button) {           //Lade till foodlevel och button för refuse
     if (mood == "dead") {
         changeToDead();
