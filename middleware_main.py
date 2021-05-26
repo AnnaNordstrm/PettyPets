@@ -2,6 +2,7 @@ import time
 from datetime import datetime
 import json
 from random import randint
+import pickle
 
 class Pet:
     #  Class for the pet
@@ -156,20 +157,73 @@ def jokestorer(build_up, punchline):
       punchlines.write("\n" + punchline)
 
 
-#username = obj
-pet = [Pet()]
-#pet[0].sleep_level(True)
+def user_store(pet_name, username, password):
+    """
+    Purpose: this function is called upon when creating a new account and pet at /namer.
+    Returns: the newly created pet object to be used.
+    """
+    pet = Pet()
+    pet.name = pet_name
+    filehandler = open('pet_file.pickle', 'rb')
+    petDictionary = {}
+    petDictionary = pickle.load(filehandler)
+    petDictionary[username] = [password, pet_name, pet]
+    filehandler.close()
 
-def user_store(pet_name):
+    filehandler = open('pet_file.pickle', 'wb')
+    pickle.dump(petDictionary, filehandler)
+    print(petDictionary[username])
+    return pet
+
+    # ISABELLES TIDIGARE KONTO-SKAPARE
+    """
     with open('user_info.txt', 'r+') as user_info:
         data = user_info.read()
         user_info.seek(0)
         user_info.write(pet_name + "\n")
         user_info.truncate()
+    """
 
-def user_load():
-    with open('user_info.txt') as user_info:
-        pet_name = user_info.readlines()
-        return (pet_name)
+def user_load(username, password):
+    """
+    Purpose: checks to see if it's the correct login at /login. 
+    Returns: the pet associated with the account logged into.
+    Note: All this code assumes there's only ONE object in pet_file.obj
+    """
+    print("user load is activated")
+    filehandler = open('pet_file.pickle', 'rb')
+    petDictionary = pickle.load(filehandler)
+    print(petDictionary)
+    if username in petDictionary:
+        list_values = petDictionary[username]
+        if list_values[0] == password:
+            print("Correct login!")
+            pet = list_values[2]
+            print("Pet object", pet)
+            return pet
+        else:
+            print("Wrong password!")
+    else:
+        print("Wrong username!")
+
+
+
+def save_progress(username, pet_name, password, pet):
+    """
+    Purpose: save the current state of the pet, together with the account's 
+    username, password and the pet's name, in pet_file.obj.
+    Returns: -
+    """
+    
+    filehandler = open('pet_file.pickle', 'rb')
+    petDictionary = pickle.load(filehandler)
+    petDictionary[username] = [password, pet_name, pet]
+    filehandler.close()
+
+    filehandler = open('pet_file.pickle', 'wb')
+    #pet_account = [username, pet_name, password, pet]
+    pickle.dump(petDictionary, filehandler)
+    print(petDictionary[username])
+    return
 
 
