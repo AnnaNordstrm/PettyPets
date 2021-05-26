@@ -8,7 +8,9 @@ from random import randint
 
 app = Flask(__name__)
 
-
+user_name = ''
+password = ''
+pets = None
 
 @app.route('/', methods=['GET','POST'])
 def sign_up():
@@ -83,7 +85,6 @@ def home_1():
         "Sleep": pets.sleep,
         "pet": pets.petted,
         "button": button_check
-
         }
     pets.lastFed = current_time()
     pets.lastSlept = current_time()
