@@ -58,6 +58,8 @@ class Pet:
                     self.sleep = False
             if self.sleepLevel < 0:
                 self.mood = "dead"
+            if self.sleepLevel < 30:
+                self.mood = "angry"
 
         """
         if self.sleep:
