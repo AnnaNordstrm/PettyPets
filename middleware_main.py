@@ -56,35 +56,28 @@ class Pet:
                     self.sleepLevel = 50
                 else:
                     self.sleep = False
-            if self.sleepLevel < 0:
-                self.mood = "dead"
-            if self.sleepLevel < 30:
+            if self.sleepLevel < 30 and self.sleepLevel >0:
                 self.mood = "angry"
+        else:
+            self.mood = "dead"
 
-        """
-        if self.sleep:
-           while self.sleepLevel < 100:
-              #self.sleepLevel = self.sleepLevel + 0.24 * int(deltatime)
-              self.sleepLevel = 100 #just nu maxas sleepLevel direkt då den får sova. Ska ändras?
-              self.sleep = False     
-        print(self.sleepLevel,", at the end of the function")
-        #return sleepLevel, sleep
-        """
 
     def pet_level(self, tryPet):
-        if self.petLevel < 0:
+        if not self.petLevel < 0:
+#            self.mood = "dead"
+            deltatime = delta_time(self.lastFed)[0]
+            self.petLevel = self.petLevel - (0.05 * deltatime)
+            if round(self.petLevel) == 100 and tryPet:
+                self.petted = False
+                self.mood = 'happy'
+            elif tryPet and not self.mood == "dead":
+                self.petLevel += 1
+                self.petted = True
+                self.mood = 'happy'
+            if round(self.petLevel) < 3 and not self.mood == "dead":
+                self.mood = 'angry'
+        else:
             self.mood = "dead"
-        deltatime = delta_time(self.lastFed)[0]
-        self.petLevel = self.petLevel - (0.05 * deltatime)
-        if round(self.petLevel) == 100 and tryPet:
-            self.petted = False
-            self.mood = 'happy'
-        elif tryPet and not self.mood == "dead":
-            self.petLevel += 1
-            self.petted = True
-            self.mood = 'happy'
-        if round(self.petLevel) < 3 and not self.mood == "dead":
-            self.mood = 'angry'
 
 
 def joke_provider():
