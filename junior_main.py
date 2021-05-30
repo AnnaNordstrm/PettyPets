@@ -1,9 +1,6 @@
 from flask import Flask, request, render_template, jsonify
-from middleware_main import joke_provider, jokestorer, delta_time, current_time, Pet, user_store, user_load, save_progress
-import time
-from datetime import datetime
-import json
-from random import randint
+from middleware_main import joke_provider, jokestorer, current_time, user_store, user_load, save_progress
+
 
 
 app = Flask(__name__)
@@ -40,39 +37,39 @@ def login():
     password = (request.form.get("password"))
     try:
         pets = user_load(user_name, password)
-        return render_template('home_main.html',pet_name=pets.name, username=user_name) # andra argumentet brukade vara pet_name=pets[0].name
+        return render_template('home_main.html',pet_name=pets.name, username=user_name)
     except:
         return render_template('sign_in_main.html', message="Username or password was incorrect!")
 
 @app.route('/home', methods=['GET','POST'])
 def home():
-    return render_template('home_main.html', pet_name=pets.name, username=user_name)   #/home splittras till 2 routs, eftersom att vi inte vill att koden i /home_1 körs varje gång
+    return render_template('home_main.html', pet_name=pets.name, username=user_name) #home_main.html is split up into two routes, because we do not want the code in /home_1 to be run at all times
 
 @app.route('/home_1', methods=['GET','POST'])
-# ska kallas från javascript
+# this route is called through ajax in javascript.
 def home_1():
-    #pets = normal_load() #doesn't have to be used, but I'm keeping it just to be safe for now.
-    button_check = request.form['user_action'] #kontrollerar om användare tryckt på knapp och kollar i så fall vilken
+    
+    button_check = request.form['user_action'] #checks to see if an interaction button has been pressed by the user.
     joke = joke_provider()
 
-    pets.feed = False                    # Nollställer feed så att den inte alltid förblir True. Annars kan djuret inte sova
+    pets.feed = False                    
     pets.sleep = False
     pets.petted = False
 
-    if int(button_check) == 1:              # mat-knappen 
+    if int(button_check) == 1:              # if feed button has been pressed
         pets.food_level(True)
-        pets.sleep_level(False)         #borde man kankse se till så att alla levels uppdateras oavsett.
+        pets.sleep_level(False)         
         pets.pet_level(False)
-    elif int(button_check) == 2:            # sova-knappen
+    elif int(button_check) == 2:            # if sleep button has been pressed
         pets.sleep_level(True)
         pets.food_level(False)
         pets.pet_level(False)
-    elif int(button_check) == 3:            # sova-knappen
+    elif int(button_check) == 3:            # if pet button has been pressed
         pets.pet_level(True)
         pets.food_level(False)
         pets.sleep_level(False)
     else:
-        pets.food_level(False)           # Ingen knapp: uppdaterar alla statusar utan att interagera med dem
+        pets.food_level(False)           # No button has been pressed.
         pets.pet_level(False)
         pets.sleep_level(False)
 

@@ -18,12 +18,12 @@ class Pet:
         self.mood = "angry"
         self.feed = False
         self.petted = False
-        self.lastPet = current_time()         #Används denna?
+        self.lastPet = current_time()
 
     def food_level(self, tryFeed):
         """
         Purpose: To make the object hungrier with time, and if right conditions: feeds the pet +30
-        Parameters:
+        Parameters: 
         tryFeed: Boolean, takes in whether user tries to feed the pet.
         Returns: an updated self, mood and feed
         """
@@ -82,7 +82,7 @@ class Pet:
 
 def joke_provider():
     """
-    Purpose: Pick a joke from punchline.dat and buildup.dat.
+    Purpose: Pick a joke from punchline2.txt and buildup2.txt.
     Returns: A list consisting of two strings, in which
     the first item is the buildup, the second is the punchline.
     """
@@ -107,7 +107,10 @@ def joke_provider():
 
 
 def delta_time (last_update):
-   # Takes the last feeding time, time now and returns the difference in minutes
+    """
+    Purpose: Takes the last update time, time now and returns the difference in minutes
+    Parameters: last_update - a sequence of number, which tells the last time the pet's status has been updated.
+    """
 
     last_feeding_time = current_time()
     now = str(current_time())
@@ -115,12 +118,12 @@ def delta_time (last_update):
     temp_now = []
     temp_last = []
 
-    for i in range(5):                                  # lagrar tidsenheterna i lista
+    for i in range(5):                                  # stores the time units in a list
         m = 2*i
         temp_last.insert(i, int(last[m]+last[m+1]))
         temp_now.insert(i, int((now[m]+now[m+1])))
 
-    time_koefficients = [525948.766, 43829.0639, 1440, 60, 1]           # allt blir i sekunder
+    time_koefficients = [525948.766, 43829.0639, 1440, 60, 1]           # changes difference in time to minutes
     deltatime = 0
 
     for i in range(5):
@@ -131,7 +134,9 @@ def delta_time (last_update):
 from datetime import datetime
 
 def current_time():
-   # Gives current date on the form YYMMDDHHMM
+    """
+    Purpose: Gives current date on the form YYMMDDHHMM
+    """
 
     time = str(datetime.now())          # Sets the variable time to current time in form of a string
     list_remove = (' ', ':', '-', '.')   # List of characters that will be removed from time
@@ -144,12 +149,15 @@ def current_time():
     return time
 
 def jokestorer(build_up, punchline):
+    """
+    Purpose: store a buildup and punchline provided by the user.
+    Paramters: buildup- a string. punchline - a string.
+    """
+    with open('buildup2.txt','a') as buildups:
+        buildups.write("\n" + build_up)
 
-   with open('buildup2.txt','a') as buildups:
-      buildups.write("\n" + build_up)
-
-   with open('punchline2.txt', 'a') as punchlines:
-      punchlines.write("\n" + punchline)
+    with open('punchline2.txt', 'a') as punchlines:
+        punchlines.write("\n" + punchline)
 
 
 def user_store(pet_name, username, password):
@@ -170,20 +178,12 @@ def user_store(pet_name, username, password):
     print(petDictionary[username])
     return pet
 
-    # ISABELLES TIDIGARE KONTO-SKAPARE
-    """
-    with open('user_info.txt', 'r+') as user_info:
-        data = user_info.read()
-        user_info.seek(0)
-        user_info.write(pet_name + "\n")
-        user_info.truncate()
-    """
 
 def user_load(username, password):
     """
     Purpose: checks to see if it's the correct login at /login. 
+    Parameters: username - a string. password - a string.
     Returns: the pet associated with the account logged into.
-    Note: All this code assumes there's only ONE object in pet_file.obj
     """
     print("user load is activated")
     filehandler = open('pet_file.pickle', 'rb')
@@ -216,7 +216,7 @@ def save_progress(username, pet_name, password, pet):
     filehandler.close()
 
     filehandler = open('pet_file.pickle', 'wb')
-    #pet_account = [username, pet_name, password, pet]
+
     pickle.dump(petDictionary, filehandler)
     print(petDictionary[username])
     return
